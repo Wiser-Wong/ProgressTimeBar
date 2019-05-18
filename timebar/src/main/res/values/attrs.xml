@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 进度条-->
+    <declare-styleable name="ProgressTimeBar">
+        <attr name="progressTimeModel" format="enum">
+            <enum name="HAS_TIME" value="1" />
+        </attr>
+        <attr name="progressTimeColor" format="color|reference" />
+        <attr name="progressUnPlayColor" format="color|reference" />
+        <attr name="progressPlayColor" format="color|reference" />
+        <attr name="progressBufferColor" format="color|reference" />
+        <attr name="progressBarColor" format="color|reference" />
+        <attr name="progressBarShadowColor" format="color|reference" />
+        <attr name="progressBarSrc" format="reference" />
+        <attr name="progressIsBarShadow" format="boolean" />
+        <attr name="progressBarShadowPadding" format="dimension|reference" />
+        <attr name="progressTimeTextSize" format="dimension|reference" />
+        <attr name="progressTimePadding" format="dimension|reference" />
+        <attr name="progressHeight" format="dimension|reference" />
+        <attr name="progressBarHeight" format="dimension|reference" />
+    </declare-styleable>
+
+</resources>
