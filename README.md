@@ -1,6 +1,18 @@
 # ProgressTimeBar
 时间播放控件ProgressTimeBar
 
+## 环境配置
+    allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+    
+    dependencies {
+	        implementation 'com.github.Wiser-Wong:ProgressTimeBar:Tag'
+	}
+
 
 ## 使用控件
     <com.wiser.timebar.ProgressTimeBar
