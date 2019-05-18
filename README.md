@@ -15,6 +15,18 @@
 
 
 ## 使用控件
+
+    设置最大时间
+    timeBar.setMaxDuration(maxDuration);
+    
+    更新你的当前播放时间以及缓冲时间
+    timeBar.setCurrentDuration(currentDuration);
+    timeBar.setBufferDuration(bufferDuration);
+    
+    设置拖动bar进度监听
+    timeBar.setSeekListener(this);
+	
+	
     <com.wiser.timebar.ProgressTimeBar
         android:id="@+id/timeBar"
         android:layout_width="match_parent"
