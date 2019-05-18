@@ -10,6 +10,9 @@ import com.wiser.timebar.ProgressTimeBar;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * @author Wiser
+ */
 public class MainActivity extends AppCompatActivity implements ProgressTimeBar.SeekListener {
 
     private long maxDuration = 60000;//最大时间
