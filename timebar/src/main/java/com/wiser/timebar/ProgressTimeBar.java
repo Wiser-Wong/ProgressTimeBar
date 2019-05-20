@@ -483,7 +483,7 @@ public class ProgressTimeBar extends View {
 				break;
 			case 2:
 				gradientColors[0] = startColor != 0 ? startColor : centerColor;
-				gradientColors[1] = centerColor != 0 ? centerColor : endColor;
+				gradientColors[1] = endColor != 0 ? endColor : centerColor;
 				weights[0] = 0;
 				weights[1] = 1;
 				break;
@@ -493,7 +493,7 @@ public class ProgressTimeBar extends View {
 				gradientColors[2] = endColor;
 				weights[0] = 0;
 				weights[1] = 0.5f;
-				weights[1] = 1;
+				weights[2] = 1;
 				break;
 		}
 		String time = getMinuteSecondStrForLong(this.currentDuration);
