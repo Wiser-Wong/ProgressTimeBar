@@ -1,5 +1,5 @@
 # ProgressTimeBar
-时间播放控件ProgressTimeBar
+万能进度条哦ProgressTimeBar
 
 ## 环境配置
     allprojects {
@@ -27,28 +27,42 @@
     timeBar.setSeekListener(this);
 	
 	
-    <com.wiser.timebar.ProgressTimeBar
-        android:id="@+id/timeBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#000000"
-        android:paddingStart="10dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="20dp"
-        app:progressBarColor="#ffffff"
-        app:progressBarHeight="20dp"
-        app:progressBarShadowColor="#ff0000"
-        app:progressBarShadowPadding="10dp"
-        app:progressBufferColor="#00ff00"
-        app:progressHeight="5dp"
-        app:progressIsBarShadow="true"
-        app:progressPlayColor="#ff00ff"
-        app:progressTimeColor="@color/colorPrimary"
-        app:progressTimeModel="HAS_TIME"
-        app:progressTimePadding="30dp"
-        app:progressTimeTextSize="15sp"
-        app:progressUnPlayColor="#00ffff" />
+        <com.wiser.timebar.ProgressTimeBar
+            android:id="@+id/timeBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBarColor="#ffff00"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="@color/colorAccent"
+            app:progressBarShadowPadding="10dp"
+            app:progressBufferCenterColor="#ffffff"
+            app:progressBufferColor="#CCCCCC"
+            app:progressBufferEndColor="#555555"
+            app:progressBufferSrc="@drawable/progress_buffer_play_bg"
+            app:progressBufferStartColor="#9932CC"
+            app:progressHeight="5dp"
+            app:progressIsBarShadow="true"
+            app:progressIsHasBar="true"
+            app:progressIsHasBuffer="true"
+            app:progressPlayCenterColor="#E0E0E0"
+            app:progressPlayColor="#00ff00"
+            app:progressPlayEndColor="#D2691E"
+            app:progressPlaySrc="@drawable/progress_buffer_play_bg"
+            app:progressPlayStartColor="#0000EE"
+            app:progressRoundRadius="10dp"
+            app:progressTimeColor="@color/colorPrimary"
+            app:progressTimeModel="HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressBarSrc="@mipmap/play"
+            app:progressUnPlayCenterColor="@color/colorPrimary"
+            app:progressUnPlayColor="#00ffff"
+            app:progressUnPlayEndColor="#ffff00"
+            app:progressUnPlaySrc="@drawable/progress_unplay_bg"
+            app:progressUnPlayStartColor="@color/colorAccent" />
+
 
 
 ## 截图
