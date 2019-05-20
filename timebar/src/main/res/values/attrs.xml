@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 进度条-->
+    <!-- 万能进度条-->
     <declare-styleable name="ProgressTimeBar">
         <attr name="progressTimeModel" format="enum">
+            <enum name="NO_HAS_TIME" value="0" />
             <enum name="HAS_TIME" value="1" />
         </attr>
         <attr name="progressTimeColor" format="color|reference" />
@@ -12,12 +13,27 @@
         <attr name="progressBarColor" format="color|reference" />
         <attr name="progressBarShadowColor" format="color|reference" />
         <attr name="progressBarSrc" format="reference" />
+        <attr name="progressUnPlaySrc" format="reference" />
+        <attr name="progressBufferSrc" format="reference" />
+        <attr name="progressPlaySrc" format="reference" />
         <attr name="progressIsBarShadow" format="boolean" />
+        <attr name="progressIsHasBar" format="boolean" />
+        <attr name="progressIsHasBuffer" format="boolean" />
         <attr name="progressBarShadowPadding" format="dimension|reference" />
         <attr name="progressTimeTextSize" format="dimension|reference" />
         <attr name="progressTimePadding" format="dimension|reference" />
         <attr name="progressHeight" format="dimension|reference" />
         <attr name="progressBarHeight" format="dimension|reference" />
+        <attr name="progressRoundRadius" format="dimension|reference" />
+        <attr name="progressUnPlayStartColor" format="color|reference" />
+        <attr name="progressUnPlayCenterColor" format="color|reference" />
+        <attr name="progressUnPlayEndColor" format="color|reference" />
+        <attr name="progressBufferStartColor" format="color|reference" />
+        <attr name="progressBufferCenterColor" format="color|reference" />
+        <attr name="progressBufferEndColor" format="color|reference" />
+        <attr name="progressPlayStartColor" format="color|reference" />
+        <attr name="progressPlayCenterColor" format="color|reference" />
+        <attr name="progressPlayEndColor" format="color|reference" />
     </declare-styleable>
 
 </resources>

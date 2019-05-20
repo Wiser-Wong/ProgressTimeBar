@@ -1,32 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:scrollbars="none">
 
-    <com.wiser.timebar.ProgressTimeBar
-        android:id="@+id/timeBar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
-        android:paddingStart="10dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="20dp"
-        app:progressBarColor="#ffffff"
-        app:progressBarHeight="20dp"
-        app:progressBarShadowColor="#ff0000"
-        app:progressBarShadowPadding="10dp"
-        app:progressBufferColor="#00ff00"
-        app:progressHeight="5dp"
-        app:progressIsBarShadow="true"
-        app:progressPlayColor="#ff00ff"
-        app:progressTimeColor="@color/colorPrimary"
-        app:progressTimeModel="HAS_TIME"
-        app:progressTimePadding="30dp"
-        app:progressTimeTextSize="15sp"
-        app:progressUnPlayColor="#00ffff" />
+        android:orientation="vertical">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="发光Bar并且带缓冲的进度条"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressTimeBar
+            android:id="@+id/timeBar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBarColor="#ffffff"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="#ffff00"
+            app:progressBarShadowPadding="10dp"
+            app:progressBufferColor="#ff0000"
+            app:progressHeight="5dp"
+            app:progressIsBarShadow="true"
+            app:progressIsHasBar="true"
+            app:progressIsHasBuffer="true"
+            app:progressPlayColor="#00ff00"
+            app:progressRoundRadius="10dp"
+            app:progressTimeColor="@color/colorPrimary"
+            app:progressTimeModel="HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressUnPlayColor="#00ffff" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="播放进度 缓冲进度 未播放进度条 渐变效果"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressTimeBar
+            android:id="@+id/timeBar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBarColor="#00f"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="#ffff00"
+            app:progressBarShadowPadding="10dp"
+            app:progressBufferCenterColor="#ffffff"
+            app:progressBufferColor="#CCCCCC"
+            app:progressBufferEndColor="#555555"
+            app:progressBufferStartColor="#9932CC"
+            app:progressHeight="5dp"
+            app:progressIsBarShadow="true"
+            app:progressIsHasBar="true"
+            app:progressIsHasBuffer="true"
+            app:progressPlayCenterColor="#E0E0E0"
+            app:progressPlayColor="#00ff00"
+            app:progressPlayEndColor="#D2691E"
+            app:progressPlayStartColor="#0000EE"
+            app:progressRoundRadius="10dp"
+            app:progressTimeColor="@color/colorPrimary"
+            app:progressTimeModel="HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressUnPlayCenterColor="@color/colorPrimary"
+            app:progressUnPlayColor="#00ffff"
+            app:progressUnPlayEndColor="#ffff00"
+            app:progressUnPlayStartColor="@color/colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="drawable或者mipmap下.9图片资源进度条"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressTimeBar
+            android:id="@+id/timeBar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBarColor="#ffff00"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="@color/colorAccent"
+            app:progressBarShadowPadding="10dp"
+            app:progressBufferCenterColor="#ffffff"
+            app:progressBufferColor="#CCCCCC"
+            app:progressBufferEndColor="#555555"
+            app:progressBufferSrc="@drawable/progress_buffer_play_bg"
+            app:progressBufferStartColor="#9932CC"
+            app:progressHeight="5dp"
+            app:progressIsBarShadow="true"
+            app:progressIsHasBar="true"
+            app:progressIsHasBuffer="true"
+            app:progressPlayCenterColor="#E0E0E0"
+            app:progressPlayColor="#00ff00"
+            app:progressPlayEndColor="#D2691E"
+            app:progressPlaySrc="@drawable/progress_buffer_play_bg"
+            app:progressPlayStartColor="#0000EE"
+            app:progressRoundRadius="10dp"
+            app:progressTimeColor="@color/colorPrimary"
+            app:progressTimeModel="HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressUnPlayCenterColor="@color/colorPrimary"
+            app:progressUnPlayColor="#00ffff"
+            app:progressUnPlayEndColor="#ffff00"
+            app:progressUnPlaySrc="@drawable/progress_unplay_bg"
+            app:progressUnPlayStartColor="@color/colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="mipmap下图片资源Bar"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressTimeBar
+            android:id="@+id/timeBar4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBarColor="#ffffff"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="#ff0000"
+            app:progressBarShadowPadding="10dp"
+            app:progressBarSrc="@mipmap/play"
+            app:progressBufferColor="#ffffff"
+            app:progressHeight="5dp"
+            app:progressIsBarShadow="false"
+            app:progressIsHasBar="true"
+            app:progressIsHasBuffer="false"
+            app:progressPlayColor="#9909ff"
+            app:progressTimeColor="@color/colorPrimary"
+            app:progressTimeModel="HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressUnPlayColor="#00ffff" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="drawable下图片资源Bar"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressTimeBar
+            android:id="@+id/timeBar5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBarColor="#ffffff"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="#ff0000"
+            app:progressBarShadowPadding="10dp"
+            app:progressBarSrc="@drawable/progress_bar_thumb"
+            app:progressBufferColor="#ffffff"
+            app:progressHeight="5dp"
+            app:progressIsBarShadow="false"
+            app:progressIsHasBar="true"
+            app:progressIsHasBuffer="false"
+            app:progressPlayColor="#bbffee"
+            app:progressTimeColor="@color/colorPrimary"
+            app:progressTimeModel="HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressUnPlayColor="#00ffff" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="没有bar并且非常高进度条"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressTimeBar
+            android:id="@+id/timeBar6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBarColor="#ffffff"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="#ff0000"
+            app:progressBarShadowPadding="10dp"
+            app:progressBufferColor="#ffffff"
+            app:progressHeight="25dp"
+            app:progressIsBarShadow="true"
+            app:progressIsHasBar="false"
+            app:progressIsHasBuffer="false"
+            app:progressPlayColor="#0000ff"
+            app:progressRoundRadius="10dp"
+            app:progressTimeColor="#ffffff"
+            app:progressTimeModel="HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressUnPlayColor="#00f00f" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="没有bar和时间进度条"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressTimeBar
+            android:id="@+id/timeBar7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBarColor="#ffffff"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="#ff0000"
+            app:progressBarShadowPadding="10dp"
+            app:progressBufferColor="#ffffff"
+            app:progressHeight="5dp"
+            app:progressIsBarShadow="true"
+            app:progressIsHasBar="false"
+            app:progressIsHasBuffer="false"
+            app:progressPlayColor="#ffffee"
+            app:progressTimeColor="@color/colorPrimary"
+            app:progressTimeModel="NO_HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressUnPlayColor="#ff0f" />
+
+        <Button
+            android:id="@+id/btn_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="播放" />
+
+        <Button
+            android:id="@+id/btn_pause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="暂停" />
+
+        <TextView
+            android:id="@+id/tv_play_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="播放中"
+            android:textColor="@color/colorAccent"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
