@@ -1,5 +1,5 @@
 # ProgressTimeBar
-万能进度条哦ProgressTimeBar
+万能进度条ProgressTimeBar
 
 ## 环境配置
     allprojects {
