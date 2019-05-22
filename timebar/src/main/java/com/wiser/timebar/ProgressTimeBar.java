@@ -34,7 +34,7 @@ public class ProgressTimeBar extends View {
 
 	private final int		NO_HAS_TIME						= 0;							// 不显示左右两侧时间
 
-	private int				timeBarModel					= NO_HAS_TIME;					// 时间模式
+	private int				timeBarMode						= NO_HAS_TIME;					// 时间模式
 
 	private final int		CANVAS_BAR_COLOR				= 10;							// 绘制Bar颜色
 
@@ -188,7 +188,7 @@ public class ProgressTimeBar extends View {
 		progressHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressHeight, progressHeight);
 		barHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressBarHeight, barHeight);
 		progressRoundRadius = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressRoundRadius, progressRoundRadius);
-		timeBarModel = typedArray.getInt(R.styleable.ProgressTimeBar_progressTimeModel, NO_HAS_TIME);
+		timeBarMode = typedArray.getInt(R.styleable.ProgressTimeBar_progressTimeMode, NO_HAS_TIME);
 		unPlayStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
 		unPlayCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
 		unPlayEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayEndColor, 0);
@@ -418,7 +418,7 @@ public class ProgressTimeBar extends View {
 	@Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		int width = right - left;
 		// 显示时间
-		if (timeBarModel == HAS_TIME) {
+		if (timeBarMode == HAS_TIME) {
 			String lTime = getMinuteSecondStrForLong(this.currentDuration);
 			String rTime = getMinuteSecondStrForLong(this.maxDuration);
 			int[] value = getTextValue(timePaint, lTime);

@@ -37,7 +37,7 @@
             app:progressPlayColor="#00ff00"
             app:progressRoundRadius="10dp"
             app:progressTimeColor="@color/colorPrimary"
-            app:progressTimeModel="HAS_TIME"
+            app:progressTimeMode="HAS_TIME"
             app:progressTimePadding="30dp"
             app:progressTimeTextSize="15sp"
             app:progressUnPlayColor="#00ffff" />
@@ -75,7 +75,7 @@
             app:progressPlayStartColor="#0000EE"
             app:progressRoundRadius="10dp"
             app:progressTimeColor="@color/colorPrimary"
-            app:progressTimeModel="HAS_TIME"
+            app:progressTimeMode="HAS_TIME"
             app:progressTimePadding="30dp"
             app:progressTimeTextSize="15sp"
             app:progressUnPlayCenterColor="@color/colorPrimary"
@@ -118,7 +118,7 @@
             app:progressPlayStartColor="#0000EE"
             app:progressRoundRadius="10dp"
             app:progressTimeColor="@color/colorPrimary"
-            app:progressTimeModel="HAS_TIME"
+            app:progressTimeMode="HAS_TIME"
             app:progressTimePadding="30dp"
             app:progressTimeTextSize="15sp"
             app:progressUnPlayCenterColor="@color/colorPrimary"
@@ -154,7 +154,7 @@
             app:progressIsHasBuffer="false"
             app:progressPlayColor="#9909ff"
             app:progressTimeColor="@color/colorPrimary"
-            app:progressTimeModel="HAS_TIME"
+            app:progressTimeMode="HAS_TIME"
             app:progressTimePadding="30dp"
             app:progressTimeTextSize="15sp"
             app:progressUnPlayColor="#00ffff" />
@@ -186,7 +186,7 @@
             app:progressIsHasBuffer="false"
             app:progressPlayColor="#bbffee"
             app:progressTimeColor="@color/colorPrimary"
-            app:progressTimeModel="HAS_TIME"
+            app:progressTimeMode="HAS_TIME"
             app:progressTimePadding="30dp"
             app:progressTimeTextSize="15sp"
             app:progressUnPlayColor="#00ffff" />
@@ -218,7 +218,7 @@
             app:progressPlayColor="#0000ff"
             app:progressRoundRadius="10dp"
             app:progressTimeColor="#ffffff"
-            app:progressTimeModel="HAS_TIME"
+            app:progressTimeMode="HAS_TIME"
             app:progressTimePadding="30dp"
             app:progressTimeTextSize="15sp"
             app:progressUnPlayColor="#00f00f" />
@@ -249,7 +249,7 @@
             app:progressIsHasBuffer="false"
             app:progressPlayColor="#ffffee"
             app:progressTimeColor="@color/colorPrimary"
-            app:progressTimeModel="NO_HAS_TIME"
+            app:progressTimeMode="NO_HAS_TIME"
             app:progressTimePadding="30dp"
             app:progressTimeTextSize="15sp"
             app:progressUnPlayColor="#ff0f" />

@@ -2,7 +2,7 @@
 <resources>
     <!-- 万能进度条-->
     <declare-styleable name="ProgressTimeBar">
-        <attr name="progressTimeModel" format="enum">
+        <attr name="progressTimeMode" format="enum">
             <enum name="NO_HAS_TIME" value="0" />
             <enum name="HAS_TIME" value="1" />
         </attr>
