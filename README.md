@@ -10,7 +10,7 @@
 	}
     
     dependencies {
-	        implementation 'com.github.Wiser-Wong:ProgressTimeBar:1.1'
+	        implementation 'com.github.Wiser-Wong:ProgressTimeBar:1.2'
 	}
 
 
