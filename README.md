@@ -10,7 +10,7 @@
 	}
     
     dependencies {
-	        implementation 'com.github.Wiser-Wong:ProgressTimeBar:1.2'
+	        implementation 'com.github.Wiser-Wong:ProgressTimeBar:1.3'
 	}
 
 
@@ -53,7 +53,7 @@
             app:progressPlayStartColor="#0000EE"
             app:progressRoundRadius="10dp"
             app:progressTimeColor="@color/colorPrimary"
-            app:progressTimeModel="HAS_TIME"
+            app:progressTimeMode="HAS_TIME"
             app:progressTimePadding="30dp"
             app:progressTimeTextSize="15sp"
             app:progressBarSrc="@mipmap/play"
