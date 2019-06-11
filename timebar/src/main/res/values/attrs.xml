@@ -36,4 +36,26 @@
         <attr name="progressPlayEndColor" format="color|reference" />
     </declare-styleable>
 
+    <!-- 万能进度条-->
+    <declare-styleable name="ProgressValueBar">
+        <attr name="progressUnPlayColor" format="color|reference" />
+        <attr name="progressPlayColor" format="color|reference" />
+        <attr name="progressBarColor" format="color|reference" />
+        <attr name="progressBarShadowColor" format="color|reference" />
+        <attr name="progressBarSrc" format="reference" />
+        <attr name="progressUnPlaySrc" format="reference" />
+        <attr name="progressPlaySrc" format="reference" />
+        <attr name="progressIsBarShadow" format="boolean" />
+        <attr name="progressIsHasBar" format="boolean" />
+        <attr name="progressBarShadowPadding" format="dimension|reference" />
+        <attr name="progressHeight" format="dimension|reference" />
+        <attr name="progressBarHeight" format="dimension|reference" />
+        <attr name="progressRoundRadius" format="dimension|reference" />
+        <attr name="progressUnPlayStartColor" format="color|reference" />
+        <attr name="progressUnPlayCenterColor" format="color|reference" />
+        <attr name="progressUnPlayEndColor" format="color|reference" />
+        <attr name="progressPlayStartColor" format="color|reference" />
+        <attr name="progressPlayCenterColor" format="color|reference" />
+        <attr name="progressPlayEndColor" format="color|reference" />
+    </declare-styleable>
 </resources>

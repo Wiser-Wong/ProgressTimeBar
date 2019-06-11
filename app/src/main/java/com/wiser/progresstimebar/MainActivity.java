@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		} else {
 			tvPlayState.setText("暂停中");
 		}
-		if (currentDuration == maxDuration) tvPlayState.setText("播放结束");
+		if (duration == maxDuration) tvPlayState.setText("播放结束");
 	}
 
 	@Override public void moveDraggingBar(ProgressTimeBar timeBar, long duration) {
@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 			tvPlayState.setText("暂停中");
 		}
 		timeBar.setCurrentDuration(duration);
-		if (currentDuration == maxDuration) tvPlayState.setText("播放结束");
 	}
 
 	@Override public void stopDraggingBar(ProgressTimeBar timeBar, long duration) {
@@ -89,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		this.currentDuration = duration;
 		timeHandler.removeMessages(UPDATE_DURATION);
 		timeHandler.sendEmptyMessage(UPDATE_DURATION);
+		if (duration == maxDuration) tvPlayState.setText("播放结束");
 	}
 
 	@Override public void onClick(View v) {
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 						reference.get().timeBar6.setBufferDuration(reference.get().bufferDuration);
 						reference.get().timeBar7.setBufferDuration(reference.get().bufferDuration);
 					}
-					if (reference.get().currentDuration == reference.get().maxDuration && reference.get().bufferDuration == reference.get().maxDuration) {
+					if (reference.get().currentDuration == reference.get().maxDuration) {
 						reference.get().tvPlayState.setText("播放结束");
 						Toast.makeText(reference.get().getApplicationContext(), "播放结束", Toast.LENGTH_SHORT).show();
 						removeMessages(reference.get().UPDATE_DURATION);
