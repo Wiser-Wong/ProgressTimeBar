@@ -17,6 +17,7 @@
 ## 使用控件
 
   * ProgressTimeBar
+  
     设置最大时间
     timeBar.setMaxDuration(maxDuration);
     
