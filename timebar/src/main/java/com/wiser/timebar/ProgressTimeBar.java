@@ -325,16 +325,17 @@ public class ProgressTimeBar extends View {
 
 		canvas.save();
 
+		setRect();
+
 		// 画时间
 		canvasTime(canvas);
+
 		// 画进度条
 		canvasProgress(canvas);
 
 		canvas.restore();
 
-		setRect();
-
-		postInvalidate();
+//		postInvalidate();
 	}
 
 	// 画进度条
@@ -564,11 +565,13 @@ public class ProgressTimeBar extends View {
 	// 设置当前时间
 	public void setCurrentDuration(long currentDuration) {
 		this.currentDuration = currentDuration;
+		postInvalidate();
 	}
 
 	// 设置当前缓冲时间
 	public void setBufferDuration(long bufferDuration) {
 		this.bufferDuration = bufferDuration;
+		postInvalidate();
 	}
 
 	// 获取文字宽高
@@ -620,14 +623,16 @@ public class ProgressTimeBar extends View {
 						seekListener.startDraggingBar(this, pressBarPlayDuration);
 					}
 				}
-				// 是否按下进度条
-				// 是否按在进度条上
-				boolean isPressProgress = isPressProgress();
-				// 当没有按下bar 并且按下进度条时 直接播放到按下位置进度
-				if (!isPressBar && isPressProgress) {
-					long pressDuration = (long) ((this.maxDuration * (downX - progressPlayRect.right)) / (progressUnPlayRect.right - progressUnPlayRect.left));
-					if (seekListener != null) seekListener.seekToDuration(this, currentDuration + pressDuration);
-				}
+				// // 是否按在进度条上
+				// boolean isPressProgress = isPressProgress();
+				// // 当没有按下bar 并且按下进度条时 直接播放到按下位置进度
+				// if (!isPressBar && isPressProgress) {
+				// long pressDuration = (long) ((this.maxDuration * (downX -
+				// progressPlayRect.right)) / (progressUnPlayRect.right -
+				// progressUnPlayRect.left));
+				// if (seekListener != null) seekListener.seekToDuration(this, currentDuration +
+				// pressDuration);
+				// }
 				break;
 			case MotionEvent.ACTION_MOVE:
 				isMove = true;
@@ -649,6 +654,8 @@ public class ProgressTimeBar extends View {
 					}
 					if (seekListener != null) {
 						seekListener.moveDraggingBar(this, pressBarPlayDuration + lastMoveToDuration);
+					} else {
+						this.currentDuration = pressBarPlayDuration + lastMoveToDuration;
 					}
 					postInvalidate();
 				}
@@ -661,11 +668,22 @@ public class ProgressTimeBar extends View {
 					if (seekListener != null) {
 						seekListener.seekToDuration(this, pressBarPlayDuration + lastMoveToDuration);
 						seekListener.stopDraggingBar(this, pressBarPlayDuration + lastMoveToDuration);
+					} else {
+						this.currentDuration = pressBarPlayDuration + lastMoveToDuration;
 					}
 					pressBarPlayDuration = 0;
 					lastMoveToDuration = 0;
 					postInvalidate();
-				}
+				} else
+					// 当没有按下bar 并且按下进度条时 直接播放到按下位置进度
+					if (!isPressBar && isPressProgress()) {
+						long pressDuration = (long) ((this.maxDuration * (downX - progressPlayRect.right)) / (progressUnPlayRect.right - progressUnPlayRect.left));
+						if (seekListener != null) seekListener.seekToDuration(this, currentDuration + pressDuration);
+						else {
+							this.currentDuration = currentDuration + pressDuration;
+							postInvalidate();
+						}
+					}
 				break;
 		}
 		return true;
