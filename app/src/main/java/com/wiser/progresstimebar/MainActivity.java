@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 	@Override public void clickProgressBar(ProgressTimeBar timeBar, long duration) {
 		System.out.println("-------点击进度条--->>" + getMinuteSecondStrForLong(duration));
 		this.currentDuration = duration;
-		timeBar.setCurrentDuration(currentDuration);
-		timeBar.setBufferDuration(bufferDuration);
 		if (!isPause) {
 			tvPlayState.setText("播放中");
 			timeHandler.removeMessages(UPDATE_DURATION);

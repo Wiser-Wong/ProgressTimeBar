@@ -665,11 +665,8 @@ public class ProgressTimeBar extends View {
 				upTouch();
 				if (isPressBar && isMove) {// 按下游标 并且移动了游标才进行抬起设置新的播放位置
 					isPressBar = false;
-					if (seekListener != null) {
-						seekListener.stopDraggingBar(this, pressBarPlayDuration + lastMoveToDuration);
-					} else {
-						this.currentDuration = pressBarPlayDuration + lastMoveToDuration;
-					}
+					if (seekListener != null) seekListener.stopDraggingBar(this, pressBarPlayDuration + lastMoveToDuration);
+					this.currentDuration = pressBarPlayDuration + lastMoveToDuration;
 					pressBarPlayDuration = 0;
 					lastMoveToDuration = 0;
 					postInvalidate();
@@ -678,10 +675,8 @@ public class ProgressTimeBar extends View {
 					if (!isPressBar && isPressProgress()) {
 						long pressDuration = (long) ((this.maxDuration * (downX - progressPlayRect.right)) / (progressUnPlayRect.right - progressUnPlayRect.left));
 						if (seekListener != null) seekListener.clickProgressBar(this, currentDuration + pressDuration);
-						else {
-							this.currentDuration = currentDuration + pressDuration;
-							postInvalidate();
-						}
+						this.currentDuration = currentDuration + pressDuration;
+						postInvalidate();
 					}
 				break;
 		}
@@ -746,11 +741,11 @@ public class ProgressTimeBar extends View {
 
 		void startDraggingBar(ProgressTimeBar timeBar, long duration);
 
-		void clickProgressBar(ProgressTimeBar timeBar, long duration);
-
 		void moveDraggingBar(ProgressTimeBar timeBar, long duration);
 
 		void stopDraggingBar(ProgressTimeBar timeBar, long duration);
+
+		void clickProgressBar(ProgressTimeBar timeBar, long duration);
 
 	}
 
