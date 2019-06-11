@@ -254,6 +254,39 @@
             app:progressTimeTextSize="15sp"
             app:progressUnPlayColor="#ff0f" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="ProgressValueBar"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressValueBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000fe0"
+            android:padding="15dp"
+            app:progressBarColor="#ffffff"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="#ffff00"
+            app:progressBarShadowPadding="10dp"
+            app:progressBufferColor="#ff0000"
+            app:progressCurrent="30"
+            app:progressHeight="5dp"
+            app:progressIsBarShadow="true"
+            app:progressIsHasBar="true"
+            app:progressIsHasBuffer="true"
+            app:progressMax="100"
+            app:progressPlayColor="#00ff00"
+            app:progressRoundRadius="3dp"
+            app:progressTimeColor="@color/colorPrimary"
+            app:progressTimeMode="HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressUnPlayColor="#00ffff" />
+
         <Button
             android:id="@+id/btn_play"
             android:layout_width="match_parent"

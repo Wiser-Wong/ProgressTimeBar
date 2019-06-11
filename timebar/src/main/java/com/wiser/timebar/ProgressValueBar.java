@@ -122,26 +122,28 @@ public class ProgressValueBar extends View {
 		this.setWillNotDraw(false); // 调用此方法后，才会执行 onDraw(Canvas) 方法
 
 		@SuppressLint("CustomViewStyleable")
-		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ProgressValueBar);
-		progressUnPlayColor = typedArray.getColor(R.styleable.ProgressValueBar_progressUnPlayColor, getResources().getColor(android.R.color.white));
-		progressPlayColor = typedArray.getColor(R.styleable.ProgressValueBar_progressPlayColor, getResources().getColor(android.R.color.holo_blue_dark));
-		barColor = typedArray.getColor(R.styleable.ProgressValueBar_progressBarColor, getResources().getColor(android.R.color.holo_green_dark));
-		isBarShadow = typedArray.getBoolean(R.styleable.ProgressValueBar_progressIsBarShadow, isBarShadow);
-		barShadowColor = typedArray.getColor(R.styleable.ProgressValueBar_progressBarShadowColor, getResources().getColor(android.R.color.white));
-		isHasBar = typedArray.getBoolean(R.styleable.ProgressValueBar_progressIsHasBar, isHasBar);
-		int barSrcId = typedArray.getResourceId(R.styleable.ProgressValueBar_progressBarSrc, -1);
-		int unPlaySrcId = typedArray.getResourceId(R.styleable.ProgressValueBar_progressUnPlaySrc, -1);
-		int playSrcId = typedArray.getResourceId(R.styleable.ProgressValueBar_progressPlaySrc, -1);
-		barShadowPadding = typedArray.getDimension(R.styleable.ProgressValueBar_progressBarShadowPadding, barShadowPadding);
-		progressHeight = (int) typedArray.getDimension(R.styleable.ProgressValueBar_progressHeight, progressHeight);
-		barHeight = (int) typedArray.getDimension(R.styleable.ProgressValueBar_progressBarHeight, barHeight);
-		progressRoundRadius = (int) typedArray.getDimension(R.styleable.ProgressValueBar_progressRoundRadius, progressRoundRadius);
-		unPlayStartColor = typedArray.getColor(R.styleable.ProgressValueBar_progressUnPlayStartColor, 0);
-		unPlayCenterColor = typedArray.getColor(R.styleable.ProgressValueBar_progressUnPlayCenterColor, 0);
-		unPlayEndColor = typedArray.getColor(R.styleable.ProgressValueBar_progressUnPlayEndColor, 0);
-		playStartColor = typedArray.getColor(R.styleable.ProgressValueBar_progressUnPlayStartColor, 0);
-		playCenterColor = typedArray.getColor(R.styleable.ProgressValueBar_progressUnPlayCenterColor, 0);
-		playEndColor = typedArray.getColor(R.styleable.ProgressValueBar_progressUnPlayEndColor, 0);
+		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ProgressTimeBar);
+		progressUnPlayColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayColor, getResources().getColor(android.R.color.white));
+		progressPlayColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressPlayColor, getResources().getColor(android.R.color.holo_blue_dark));
+		barColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBarColor, getResources().getColor(android.R.color.holo_green_dark));
+		isBarShadow = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsBarShadow, isBarShadow);
+		barShadowColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBarShadowColor, getResources().getColor(android.R.color.white));
+		isHasBar = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBar, isHasBar);
+		int barSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBarSrc, -1);
+		int unPlaySrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressUnPlaySrc, -1);
+		int playSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressPlaySrc, -1);
+		barShadowPadding = typedArray.getDimension(R.styleable.ProgressTimeBar_progressBarShadowPadding, barShadowPadding);
+		progressHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressHeight, progressHeight);
+		barHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressBarHeight, barHeight);
+		progressRoundRadius = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressRoundRadius, progressRoundRadius);
+		unPlayStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
+		unPlayCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
+		unPlayEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayEndColor, 0);
+		playStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
+		playCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
+		playEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayEndColor, 0);
+		maxValue = typedArray.getInteger(R.styleable.ProgressTimeBar_progressMax, 0);
+		currentValue = typedArray.getInteger(R.styleable.ProgressTimeBar_progressCurrent, 0);
 		typedArray.recycle();
 
 		initPaint();
