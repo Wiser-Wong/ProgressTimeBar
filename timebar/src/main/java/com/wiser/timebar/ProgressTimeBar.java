@@ -124,7 +124,7 @@ public class ProgressTimeBar extends View {
 
 	private long			maxDuration;													// 总时间
 
-	private float			downX, downY, lastMoveX;										// 按下坐标XY 以及记录移动位置
+	private float			downX, downY;													// 按下坐标XY 以及记录移动位置
 
 	private boolean			isPressBar;														// 是否按在bar上
 
@@ -335,7 +335,7 @@ public class ProgressTimeBar extends View {
 
 		canvas.restore();
 
-//		postInvalidate();
+		// postInvalidate();
 	}
 
 	// 画进度条
@@ -610,7 +610,7 @@ public class ProgressTimeBar extends View {
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 				downTouch();
-				downX = lastMoveX = event.getX();
+				downX = event.getX();
 				downY = event.getY();
 				// 是否按下bar
 				isPressBar = isPressBar();
@@ -637,13 +637,13 @@ public class ProgressTimeBar extends View {
 			case MotionEvent.ACTION_MOVE:
 				isMove = true;
 				if (isPressBar) {
-					float moveX = event.getX() - lastMoveX;
+					float moveX = event.getX() - downX;
 					// 记录位置
-					lastMoveX = event.getX();
+					// lastMoveX = event.getX();
 					// 计算移动时间
 					long moveToDuration = (long) ((this.maxDuration * moveX) / (progressUnPlayRect.right - progressUnPlayRect.left));
 					// 记录上一次时间
-					lastMoveToDuration += moveToDuration;
+					lastMoveToDuration = moveToDuration;
 					// 滑动游标bar最小时间临界值
 					if (lastMoveToDuration + pressBarPlayDuration <= 0) {
 						lastMoveToDuration = -pressBarPlayDuration;
@@ -666,7 +666,6 @@ public class ProgressTimeBar extends View {
 				if (isPressBar && isMove) {// 按下游标 并且移动了游标才进行抬起设置新的播放位置
 					isPressBar = false;
 					if (seekListener != null) {
-						seekListener.seekToDuration(this, pressBarPlayDuration + lastMoveToDuration);
 						seekListener.stopDraggingBar(this, pressBarPlayDuration + lastMoveToDuration);
 					} else {
 						this.currentDuration = pressBarPlayDuration + lastMoveToDuration;
@@ -678,7 +677,7 @@ public class ProgressTimeBar extends View {
 					// 当没有按下bar 并且按下进度条时 直接播放到按下位置进度
 					if (!isPressBar && isPressProgress()) {
 						long pressDuration = (long) ((this.maxDuration * (downX - progressPlayRect.right)) / (progressUnPlayRect.right - progressUnPlayRect.left));
-						if (seekListener != null) seekListener.seekToDuration(this, currentDuration + pressDuration);
+						if (seekListener != null) seekListener.clickProgressBar(this, currentDuration + pressDuration);
 						else {
 							this.currentDuration = currentDuration + pressDuration;
 							postInvalidate();
@@ -747,7 +746,7 @@ public class ProgressTimeBar extends View {
 
 		void startDraggingBar(ProgressTimeBar timeBar, long duration);
 
-		void seekToDuration(ProgressTimeBar timeBar, long duration);
+		void clickProgressBar(ProgressTimeBar timeBar, long duration);
 
 		void moveDraggingBar(ProgressTimeBar timeBar, long duration);
 

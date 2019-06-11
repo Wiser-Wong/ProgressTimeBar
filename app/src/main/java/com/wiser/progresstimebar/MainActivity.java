@@ -60,52 +60,37 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		System.out.println("-------开始--->>" + getMinuteSecondStrForLong(duration));
 	}
 
-	@Override public void seekToDuration(ProgressTimeBar timeBar, long duration) {
+	@Override public void clickProgressBar(ProgressTimeBar timeBar, long duration) {
+		System.out.println("-------点击进度条--->>" + getMinuteSecondStrForLong(duration));
 		this.currentDuration = duration;
+		timeBar.setCurrentDuration(currentDuration);
+		timeBar.setBufferDuration(bufferDuration);
 		if (!isPause) {
 			tvPlayState.setText("播放中");
-			timeBar1.setCurrentDuration(currentDuration);
-			timeBar1.setBufferDuration(bufferDuration);
-			timeBar2.setCurrentDuration(currentDuration);
-			timeBar2.setBufferDuration(bufferDuration);
-			timeBar3.setCurrentDuration(currentDuration);
-			timeBar3.setBufferDuration(bufferDuration);
-			timeBar4.setCurrentDuration(currentDuration);
-			timeBar4.setBufferDuration(bufferDuration);
-			timeBar5.setCurrentDuration(currentDuration);
-			timeBar5.setBufferDuration(bufferDuration);
-			timeBar6.setBufferDuration(bufferDuration);
-			timeBar6.setBufferDuration(bufferDuration);
-			timeBar7.setBufferDuration(bufferDuration);
-			timeBar7.setBufferDuration(bufferDuration);
 			timeHandler.removeMessages(UPDATE_DURATION);
 			timeHandler.sendEmptyMessage(UPDATE_DURATION);
 		} else {
 			tvPlayState.setText("暂停中");
-			timeBar1.setCurrentDuration(currentDuration);
-			timeBar1.setBufferDuration(bufferDuration);
-			timeBar2.setCurrentDuration(currentDuration);
-			timeBar2.setBufferDuration(bufferDuration);
-			timeBar3.setCurrentDuration(currentDuration);
-			timeBar3.setBufferDuration(bufferDuration);
-			timeBar4.setCurrentDuration(currentDuration);
-			timeBar4.setBufferDuration(bufferDuration);
-			timeBar5.setCurrentDuration(currentDuration);
-			timeBar5.setBufferDuration(bufferDuration);
-			timeBar6.setBufferDuration(bufferDuration);
-			timeBar6.setBufferDuration(bufferDuration);
-			timeBar7.setBufferDuration(bufferDuration);
-			timeBar7.setBufferDuration(bufferDuration);
 		}
 		if (currentDuration == maxDuration) tvPlayState.setText("播放结束");
 	}
 
 	@Override public void moveDraggingBar(ProgressTimeBar timeBar, long duration) {
 		System.out.println("-------移动--->>" + getMinuteSecondStrForLong(duration));
+		if (!isPause) {
+			tvPlayState.setText("播放中");
+		} else {
+			tvPlayState.setText("暂停中");
+		}
+		timeBar.setCurrentDuration(duration);
+		if (currentDuration == maxDuration) tvPlayState.setText("播放结束");
 	}
 
 	@Override public void stopDraggingBar(ProgressTimeBar timeBar, long duration) {
 		System.out.println("-------停止--->>" + getMinuteSecondStrForLong(duration));
+		this.currentDuration = duration;
+		timeHandler.removeMessages(UPDATE_DURATION);
+		timeHandler.sendEmptyMessage(UPDATE_DURATION);
 	}
 
 	@Override public void onClick(View v) {
