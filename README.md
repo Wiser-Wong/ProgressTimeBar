@@ -18,15 +18,15 @@
 
   * ProgressTimeBar
   
-    设置最大时间
-    timeBar.setMaxDuration(maxDuration);
+        设置最大时间
+        timeBar.setMaxDuration(maxDuration);
     
-    更新你的当前播放时间以及缓冲时间
-    timeBar.setCurrentDuration(currentDuration);
-    timeBar.setBufferDuration(bufferDuration);
+        更新你的当前播放时间以及缓冲时间
+        timeBar.setCurrentDuration(currentDuration);
+        timeBar.setBufferDuration(bufferDuration);
     
-    设置拖动bar进度监听
-    timeBar.setSeekListener(this);
+        设置拖动bar进度监听
+        timeBar.setSeekListener(this);
 	
 	
         <com.wiser.timebar.ProgressTimeBar
@@ -65,6 +65,43 @@
             app:progressUnPlaySrc="@drawable/progress_unplay_bg"
             app:progressUnPlayStartColor="@color/colorAccent" />
 
+* ProgressValueBar
+  
+        设置最大值
+        progressValueBar.setMaxValue(maxValue);
+    
+        设置当前值
+        progressValueBar.setCurrentValue(currentValue);
+    
+        设置拖动bar进度监听
+        progressValueBar.setSeekListener(this);
+	
+	
+        <com.wiser.timebar.ProgressValueBar
+            android:id="@+id/valueBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBarColor="#ffff00"
+            app:progressBarHeight="20dp"
+            app:progressBarShadowColor="@color/colorAccent"
+            app:progressBarShadowPadding="10dp"
+            app:progressHeight="5dp"
+            app:progressIsBarShadow="true"
+            app:progressIsHasBar="true"
+            app:progressPlayCenterColor="#E0E0E0"
+            app:progressPlayColor="#00ff00"
+            app:progressPlayEndColor="#D2691E"
+            app:progressPlaySrc="@drawable/progress_buffer_play_bg"
+            app:progressPlayStartColor="#0000EE"
+            app:progressRoundRadius="10dp"
+            app:progressBarSrc="@mipmap/play"
+            app:progressUnPlayCenterColor="@color/colorPrimary"
+            app:progressUnPlayColor="#00ffff"
+            app:progressUnPlayEndColor="#ffff00"
+            app:progressUnPlaySrc="@drawable/progress_unplay_bg"
+            app:progressUnPlayStartColor="@color/colorAccent" />
 ## 操作手册
 
 * progressBarSrc：进度条拖动bar图片Drawable或mipmap下图片资源
