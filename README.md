@@ -101,7 +101,9 @@
             app:progressUnPlayColor="#00ffff"
             app:progressUnPlayEndColor="#ffff00"
             app:progressUnPlaySrc="@drawable/progress_unplay_bg"
-            app:progressUnPlayStartColor="@color/colorAccent" />
+            app:progressUnPlayStartColor="@color/colorAccent"
+	    app:progresssMax="100"
+	    app:progressCurrent="40"/>
 ## 操作手册
 
 * progressBarSrc：进度条拖动bar图片Drawable或mipmap下图片资源
