@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wiser.timebar.ProgressTimeBar;
+import com.wiser.timebar.ProgressValueBar;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
@@ -22,39 +23,41 @@ import java.util.TimeZone;
  * 
  *         模拟播放暂停
  */
-public class MainActivity extends AppCompatActivity implements ProgressTimeBar.SeekListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements ProgressTimeBar.SeekListener, ProgressValueBar.SeekListener, View.OnClickListener {
 
-	private long			maxDuration		= 60000;// 最大时间
+	private long				maxDuration		= 60000;// 最大时间
 
-	private long			currentDuration	= 0;	// 当前时间
+	private long				currentDuration	= 0;	// 当前时间
 
-	private long			bufferDuration	= 0;	// 缓冲时间
+	private long				bufferDuration	= 0;	// 缓冲时间
 
-	private ProgressTimeBar	timeBar1;
+	private ProgressTimeBar		timeBar1;
 
-	private ProgressTimeBar	timeBar2;
+	private ProgressTimeBar		timeBar2;
 
-	private ProgressTimeBar	timeBar3;
+	private ProgressTimeBar		timeBar3;
 
-	private ProgressTimeBar	timeBar4;
+	private ProgressTimeBar		timeBar4;
 
-	private ProgressTimeBar	timeBar5;
+	private ProgressTimeBar		timeBar5;
 
-	private ProgressTimeBar	timeBar6;
+	private ProgressTimeBar		timeBar6;
 
-	private ProgressTimeBar	timeBar7;
+	private ProgressTimeBar		timeBar7;
 
-	private Button			btnPlay;
+	private ProgressValueBar	timeBar8;
 
-	private Button			btnPause;
+	private Button				btnPlay;
 
-	private TextView		tvPlayState;
+	private Button				btnPause;
 
-	private TimeHandler		timeHandler;
+	private TextView			tvPlayState;
 
-	private final int		UPDATE_DURATION	= 111;
+	private TimeHandler			timeHandler;
 
-	private boolean			isPause;
+	private final int			UPDATE_DURATION	= 111;
+
+	private boolean				isPause;
 
 	@Override public void startDraggingBar(ProgressTimeBar timeBar, long duration) {
 		System.out.println("-------开始--->>" + getMinuteSecondStrForLong(duration));
@@ -109,6 +112,22 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 				}
 				break;
 		}
+	}
+
+	@Override public void startDraggingBar(ProgressValueBar progressValueBar, long value) {
+
+	}
+
+	@Override public void moveDraggingBar(ProgressValueBar progressValueBar, long value) {
+		Toast.makeText(this, "拖动位置:--->>" + value, Toast.LENGTH_SHORT).show();
+	}
+
+	@Override public void stopDraggingBar(ProgressValueBar progressValueBar, long value) {
+		Toast.makeText(this, "抬起位置:--->>" + value, Toast.LENGTH_SHORT).show();
+	}
+
+	@Override public void clickProgressBar(ProgressValueBar progressValueBar, long value) {
+		Toast.makeText(this, "点击位置:--->>" + value, Toast.LENGTH_SHORT).show();
 	}
 
 	private static class TimeHandler extends Handler {
@@ -202,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		timeBar5 = findViewById(R.id.timeBar5);
 		timeBar6 = findViewById(R.id.timeBar6);
 		timeBar7 = findViewById(R.id.timeBar7);
+		timeBar8 = findViewById(R.id.timeBar8);
 
 		btnPlay = findViewById(R.id.btn_play);
 		btnPause = findViewById(R.id.btn_pause);
@@ -214,6 +234,9 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		timeBar5.setMaxDuration(maxDuration);
 		timeBar6.setMaxDuration(maxDuration);
 		timeBar7.setMaxDuration(maxDuration);
+		timeBar8.setCurrentValue(20);
+		timeBar8.setMaxValue(100);
+		timeBar8.setStartValue(10);
 
 		timeBar1.setSeekListener(this);
 		timeBar2.setSeekListener(this);
@@ -222,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		timeBar5.setSeekListener(this);
 		timeBar6.setSeekListener(this);
 		timeBar7.setSeekListener(this);
+		timeBar8.setSeekListener(this);
 
 		btnPlay.setOnClickListener(this);
 		btnPause.setOnClickListener(this);

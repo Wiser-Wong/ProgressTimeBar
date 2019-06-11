@@ -84,6 +84,8 @@ public class ProgressValueBar extends View {
 
 	private long			maxValue;														// 总值
 
+	private long			startValue;														// 初始值
+
 	private float			downX, downY;													// 按下坐标XY 以及记录移动位置
 
 	private boolean			isPressBar;														// 是否按在bar上
@@ -142,8 +144,9 @@ public class ProgressValueBar extends View {
 		playStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
 		playCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
 		playEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayEndColor, 0);
-		maxValue = typedArray.getInteger(R.styleable.ProgressTimeBar_progressMax, 0);
-		currentValue = typedArray.getInteger(R.styleable.ProgressTimeBar_progressCurrent, 0);
+		maxValue = typedArray.getInteger(R.styleable.ProgressTimeBar_progressMaxValue, 0);
+		currentValue = typedArray.getInteger(R.styleable.ProgressTimeBar_progressCurrentValue, 0);
+		startValue = typedArray.getInteger(R.styleable.ProgressTimeBar_progressStartValue, 0);
 		typedArray.recycle();
 
 		initPaint();
@@ -153,6 +156,9 @@ public class ProgressValueBar extends View {
 		initBarCanvasMode(barSrcId);
 
 		initRect();
+
+		this.maxValue = maxValue - startValue;
+		this.currentValue = currentValue - startValue;
 	}
 
 	// 初始化画笔
@@ -413,12 +419,17 @@ public class ProgressValueBar extends View {
 
 	// 设置总值
 	public void setMaxValue(long maxValue) {
-		this.maxValue = maxValue;
+		this.maxValue = maxValue - startValue;
+	}
+
+	// 设置初始值
+	public void setStartValue(long startValue) {
+		this.startValue = startValue;
 	}
 
 	// 设置当前值
 	public void setCurrentValue(long currentValue) {
-		this.currentValue = currentValue;
+		this.currentValue = currentValue - startValue;
 		postInvalidate();
 	}
 
@@ -436,7 +447,7 @@ public class ProgressValueBar extends View {
 					pressBarPlayValue = this.currentValue;
 					Toast.makeText(getContext(), "游标", Toast.LENGTH_SHORT).show();
 					if (seekListener != null) {
-						seekListener.startDraggingBar(this, pressBarPlayValue);
+						seekListener.startDraggingBar(this, pressBarPlayValue + startValue);
 					}
 				}
 				// // 是否按在进度条上
@@ -467,7 +478,7 @@ public class ProgressValueBar extends View {
 						lastMoveToValue = maxValue - pressBarPlayValue;
 					}
 					if (seekListener != null) {
-						seekListener.moveDraggingBar(this, pressBarPlayValue + lastMoveToValue);
+						seekListener.moveDraggingBar(this, pressBarPlayValue + lastMoveToValue + startValue);
 					} else {
 						this.currentValue = pressBarPlayValue + lastMoveToValue;
 					}
@@ -479,14 +490,14 @@ public class ProgressValueBar extends View {
 				upTouch();
 				if (isPressBar && isMove) {// 按下游标 并且移动了游标才进行抬起设置新的值位置
 					isPressBar = false;
-					if (seekListener != null) seekListener.stopDraggingBar(this, pressBarPlayValue + lastMoveToValue);
+					if (seekListener != null) seekListener.stopDraggingBar(this, pressBarPlayValue + lastMoveToValue + startValue);
 					this.currentValue = pressBarPlayValue + lastMoveToValue;
 					pressBarPlayValue = 0;
 					lastMoveToValue = 0;
 					postInvalidate();
 				} else if (!isPressBar && isPressProgress()) {
 					long pressValue = (long) ((this.maxValue * (downX - progressPlayRect.right)) / (progressUnPlayRect.right - progressUnPlayRect.left));
-					if (seekListener != null) seekListener.clickProgressBar(this, currentValue + pressValue);
+					if (seekListener != null) seekListener.clickProgressBar(this, currentValue + pressValue + startValue);
 					this.currentValue = currentValue + pressValue;
 					postInvalidate();
 				}

@@ -34,8 +34,9 @@
         <attr name="progressPlayStartColor" format="color|reference" />
         <attr name="progressPlayCenterColor" format="color|reference" />
         <attr name="progressPlayEndColor" format="color|reference" />
-        <attr name="progressMax" format="integer" />
-        <attr name="progressCurrent" format="integer" />
+        <attr name="progressMaxValue" format="integer" />
+        <attr name="progressCurrentValue" format="integer" />
+        <attr name="progressStartValue" format="integer" />
     </declare-styleable>
 
 </resources>
