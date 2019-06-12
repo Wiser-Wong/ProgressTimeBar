@@ -67,13 +67,15 @@
 	    app:progressIsHasPlayProgress="true"/>
 
 * ProgressValueBar
-  
-        设置最大值
+  	
+		设置区间起始值
+    	progressValueBar.setStartValue(startValue)
+     	设置最大值
         progressValueBar.setMaxValue(maxValue);
-    
+	
         设置当前值
         progressValueBar.setCurrentValue(currentValue);
-    
+	
         设置拖动bar进度监听
         progressValueBar.setSeekListener(this);
 	
