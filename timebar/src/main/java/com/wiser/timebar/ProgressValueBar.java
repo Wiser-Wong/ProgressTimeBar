@@ -108,6 +108,8 @@ public class ProgressValueBar extends View {
 
 	private int				playStartColor, playCenterColor, playEndColor;					// 播放渐变颜色值
 
+	private boolean			isFirstInitStartValue;											// 是否首先初始化了startValue
+
 	public ProgressValueBar(Context context) {
 		super(context);
 		init(context, null);
@@ -386,6 +388,7 @@ public class ProgressValueBar extends View {
 
 	// 更新bar和播放进度矩阵
 	private void setRect() {
+		if (this.currentValue < 0) this.currentValue = 0;
 		// bar进度
 		barRect.left = progressUnPlayRect.left + calculateBarRect();
 		barRect.right = barRect.left + barHeight;
@@ -419,17 +422,22 @@ public class ProgressValueBar extends View {
 
 	// 设置总值
 	public void setMaxValue(long maxValue) {
-		this.maxValue = maxValue - startValue;
+		if (isFirstInitStartValue) this.maxValue = maxValue - startValue;
+		else this.maxValue = maxValue;
 	}
 
 	// 设置初始值
 	public void setStartValue(long startValue) {
 		this.startValue = startValue;
+		this.maxValue = maxValue - startValue;
+		this.currentValue = currentValue - startValue;
+		this.isFirstInitStartValue = true;
 	}
 
 	// 设置当前值
 	public void setCurrentValue(long currentValue) {
-		this.currentValue = currentValue - startValue;
+		if (isFirstInitStartValue) this.currentValue = currentValue - startValue;
+		else this.currentValue = currentValue;
 		postInvalidate();
 	}
 
@@ -478,7 +486,7 @@ public class ProgressValueBar extends View {
 						lastMoveToValue = maxValue - pressBarPlayValue;
 					}
 					if (seekListener != null) {
-						seekListener.moveDraggingBar(this, pressBarPlayValue + lastMoveToValue + startValue);
+						if (startValue > 0) seekListener.moveDraggingBar(this, pressBarPlayValue + lastMoveToValue + startValue);
 					} else {
 						this.currentValue = pressBarPlayValue + lastMoveToValue;
 					}

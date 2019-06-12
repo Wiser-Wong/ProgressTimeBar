@@ -282,7 +282,7 @@
             app:progressMaxValue="100"
             app:progressPlayColor="#00ff00"
             app:progressRoundRadius="3dp"
-            app:progressStartValue="10"
+            app:progressStartValue="-40"
             app:progressTimeColor="@color/colorPrimary"
             app:progressTimeMode="HAS_TIME"
             app:progressTimePadding="30dp"
