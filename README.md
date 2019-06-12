@@ -63,7 +63,8 @@
             app:progressUnPlayColor="#00ffff"
             app:progressUnPlayEndColor="#ffff00"
             app:progressUnPlaySrc="@drawable/progress_unplay_bg"
-            app:progressUnPlayStartColor="@color/colorAccent" />
+            app:progressUnPlayStartColor="@color/colorAccent"
+	    app:progressIsHasPlayProgress="true"/>
 
 * ProgressValueBar
   
@@ -106,6 +107,7 @@
 	    app:progressCurrent="40"/>
 ## 操作手册
 
+### ProgressTimeBar
 * progressBarSrc：进度条拖动bar图片Drawable或mipmap下图片资源
 * progressBarColor:进度条拖动bar颜色
 * progressBarHeight：进度条拖动bar高度
@@ -121,6 +123,7 @@
 * progressIsBarShadow：进度条是否显示拖动bar阴影
 * progressIsHasBar：进度条是否有拖动bar
 * progressIsHasBuffer：进度条是否有缓存进度
+* progressIsHasPlayProgress：进度条是否有播放进度
 * progressPlayColor：进度条播放中进度颜色
 * progressPlaySrc：进度条播放中进度图片Drawable或者mipmap下图片
 * progressPlayStartColor：进度条播放中进度渐变开始颜色值
