@@ -146,5 +146,32 @@
 * progressUnPlayEndColor：进度条未播放渐变颜色值结尾颜色值
 * 进度条未播放渐变颜色值可设置一种、progressUnPlayStartColor、progressUnPlayCenterColor、progressUnPlayEndColor可以不同时设置
 
+### ProgressValueBar
+* progressValueBarSrc：进度条拖动bar图片Drawable或mipmap下图片资源
+* progressValueBarColor:进度条拖动bar颜色
+* progressValueBarHeight：进度条拖动bar高度
+* progressValueBarShadowColor：进度条拖动bar阴影颜色
+* progressValueBarShadowPadding：进度条拖动bar阴影与拖动bar间距离
+* progressValueHeight：进度条高度
+* progressValueIsBarShadow：进度条是否显示拖动bar阴影
+* progressValueIsHasBar：进度条是否有拖动bar
+* progressValueIsHasPlayProgress：进度条是否有播放进度
+* progressValuePlayColor：进度条播放中进度颜色
+* progressValuePlaySrc：进度条播放中进度图片Drawable或者mipmap下图片
+* progressValuePlayStartColor：进度条播放中进度渐变开始颜色值
+* progressValuePlayCenterColor：进度条播放中进度渐变中间颜色值
+* progressValuePlayEndColor：进度条播放中进度渐变结尾颜色值
+* 进度条播放渐变颜色值可设置一种、progressValuePlayStartColor、progressValuePlayCenterColor、progressValuePlayEndColor可以不同时设置
+* progressValueRoundRadius：进度条弧度半径
+* progressValueUnPlayColor：进度条未播放进度颜色
+* progressValueUnPlaySrc：进度条未播放进度图片Drawable或mipmap下图片资源
+* progressValueUnPlayStartColor：进度条未播放渐变颜色开始颜色值
+* progressValueUnPlayCenterColor：进度条未播放渐变颜色中间颜色值
+* progressValueUnPlayEndColor：进度条未播放渐变颜色值结尾颜色值
+* 进度条未播放渐变颜色值可设置一种、progressValueUnPlayStartColor、progressValueUnPlayCenterColor、progressValueUnPlayEndColor可以不同时设置
+* progressCurrentValue：进度条当前进度值
+* progressStartValue：进度条区间起始值
+* progressMaxValue：进度条最大值
+
 ## 截图
 ![images](https://github.com/Wiser-Wong/ProgressTimeBar/blob/master/images/timebar.gif)
