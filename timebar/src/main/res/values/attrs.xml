@@ -34,9 +34,34 @@
         <attr name="progressPlayStartColor" format="color|reference" />
         <attr name="progressPlayCenterColor" format="color|reference" />
         <attr name="progressPlayEndColor" format="color|reference" />
+        <attr name="progressIsHasPlayProgress" format="boolean" />
+    </declare-styleable>
+
+    <!-- 万能进度条-->
+    <declare-styleable name="ProgressValueBar">
+        <attr name="progressValueUnPlayColor" format="color|reference" />
+        <attr name="progressValuePlayColor" format="color|reference" />
+        <attr name="progressValueBarColor" format="color|reference" />
+        <attr name="progressValueBarShadowColor" format="color|reference" />
+        <attr name="progressValueBarSrc" format="reference" />
+        <attr name="progressValueUnPlaySrc" format="reference" />
+        <attr name="progressValuePlaySrc" format="reference" />
+        <attr name="progressValueIsBarShadow" format="boolean" />
+        <attr name="progressValueIsHasBar" format="boolean" />
+        <attr name="progressValueBarShadowPadding" format="dimension|reference" />
+        <attr name="progressValueHeight" format="dimension|reference" />
+        <attr name="progressValueBarHeight" format="dimension|reference" />
+        <attr name="progressValueRoundRadius" format="dimension|reference" />
+        <attr name="progressValueUnPlayStartColor" format="color|reference" />
+        <attr name="progressValueUnPlayCenterColor" format="color|reference" />
+        <attr name="progressValueUnPlayEndColor" format="color|reference" />
+        <attr name="progressValuePlayStartColor" format="color|reference" />
+        <attr name="progressValuePlayCenterColor" format="color|reference" />
+        <attr name="progressValuePlayEndColor" format="color|reference" />
         <attr name="progressMaxValue" format="integer" />
         <attr name="progressCurrentValue" format="integer" />
         <attr name="progressStartValue" format="integer" />
+        <attr name="progressValueIsHasPlayProgress" format="boolean" />
     </declare-styleable>
 
 </resources>

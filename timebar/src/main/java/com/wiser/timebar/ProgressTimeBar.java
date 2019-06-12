@@ -138,6 +138,8 @@ public class ProgressTimeBar extends View {
 
 	private boolean			isHasBuffer;													// 是否有缓冲
 
+	private boolean			isHasPlayProgress				= true;							// 是否有已播放进度
+
 	private SeekListener	seekListener;													// 设置播放进度监听
 
 	private LinearGradient	linearGradientUnPlay;											// 未播放渐变组件
@@ -178,6 +180,7 @@ public class ProgressTimeBar extends View {
 		barShadowColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBarShadowColor, getResources().getColor(android.R.color.white));
 		isHasBar = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBar, isHasBar);
 		isHasBuffer = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBuffer, isHasBuffer);
+		isHasPlayProgress = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasPlayProgress, isHasPlayProgress);
 		int barSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBarSrc, -1);
 		int unPlaySrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressUnPlaySrc, -1);
 		int bufferSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBufferSrc, -1);
@@ -365,15 +368,17 @@ public class ProgressTimeBar extends View {
 			}
 		}
 
-		// 画播放进度
-		switch (progressPlayCanvasModel) {
-			case CANVAS_PROGRESS_PLAY_COLOR:
-				canvas.drawRoundRect(progressPlayRect, progressRoundRadius, progressRoundRadius, progressPlayPaint);
-				break;
-			case CANVAS_PROGRESS_PLAY_DRAWABLE:
-				playDrawable.setBounds((int) progressPlayRect.left, (int) progressPlayRect.top, (int) progressPlayRect.right, (int) progressPlayRect.bottom);
-				playDrawable.draw(canvas);
-				break;
+		if (isHasPlayProgress){
+			// 画播放进度
+			switch (progressPlayCanvasModel) {
+				case CANVAS_PROGRESS_PLAY_COLOR:
+					canvas.drawRoundRect(progressPlayRect, progressRoundRadius, progressRoundRadius, progressPlayPaint);
+					break;
+				case CANVAS_PROGRESS_PLAY_DRAWABLE:
+					playDrawable.setBounds((int) progressPlayRect.left, (int) progressPlayRect.top, (int) progressPlayRect.right, (int) progressPlayRect.bottom);
+					playDrawable.draw(canvas);
+					break;
+			}
 		}
 
 		// 是否有Bar
