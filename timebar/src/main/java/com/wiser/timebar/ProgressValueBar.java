@@ -489,11 +489,8 @@ public class ProgressValueBar extends View {
 					if (lastMoveToValue + pressBarPlayValue >= maxValue) {
 						lastMoveToValue = maxValue - pressBarPlayValue;
 					}
-					if (seekListener != null) {
-						if (startValue > 0) seekListener.moveDraggingBar(this, pressBarPlayValue + lastMoveToValue + startValue);
-					} else {
-						this.currentValue = pressBarPlayValue + lastMoveToValue;
-					}
+					if (seekListener != null) seekListener.moveDraggingBar(this, pressBarPlayValue + lastMoveToValue + startValue);
+					this.currentValue = pressBarPlayValue + lastMoveToValue;
 					postInvalidate();
 				}
 				break;

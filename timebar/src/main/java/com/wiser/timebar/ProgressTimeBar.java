@@ -368,7 +368,7 @@ public class ProgressTimeBar extends View {
 			}
 		}
 
-		if (isHasPlayProgress){
+		if (isHasPlayProgress) {
 			// 画播放进度
 			switch (progressPlayCanvasModel) {
 				case CANVAS_PROGRESS_PLAY_COLOR:
@@ -657,11 +657,8 @@ public class ProgressTimeBar extends View {
 					if (lastMoveToDuration + pressBarPlayDuration >= maxDuration) {
 						lastMoveToDuration = maxDuration - pressBarPlayDuration;
 					}
-					if (seekListener != null) {
-						seekListener.moveDraggingBar(this, pressBarPlayDuration + lastMoveToDuration);
-					} else {
-						this.currentDuration = pressBarPlayDuration + lastMoveToDuration;
-					}
+					if (seekListener != null) seekListener.moveDraggingBar(this, pressBarPlayDuration + lastMoveToDuration);
+					this.currentDuration = pressBarPlayDuration + lastMoveToDuration;
 					postInvalidate();
 				}
 				break;
