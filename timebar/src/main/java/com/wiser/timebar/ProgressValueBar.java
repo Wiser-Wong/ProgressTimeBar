@@ -110,8 +110,6 @@ public class ProgressValueBar extends View {
 
 	private int				playStartColor, playCenterColor, playEndColor;					// 播放渐变颜色值
 
-	private boolean			isFirstInitStartValue;											// 是否首先初始化了startValue
-
 	public ProgressValueBar(Context context) {
 		super(context);
 		init(context, null);
@@ -393,6 +391,7 @@ public class ProgressValueBar extends View {
 	// 更新bar和播放进度矩阵
 	private void setRect() {
 		if (this.currentValue < 0) this.currentValue = 0;
+		if (this.currentValue > maxValue) this.currentValue = maxValue;
 		// bar进度
 		barRect.left = progressUnPlayRect.left + calculateBarRect();
 		barRect.right = barRect.left + barHeight;
@@ -426,23 +425,35 @@ public class ProgressValueBar extends View {
 
 	// 设置总值
 	public void setMaxValue(long maxValue) {
-		if (isFirstInitStartValue) this.maxValue = maxValue - startValue;
-		else this.maxValue = maxValue;
+		this.maxValue = maxValue - startValue;
 	}
 
 	// 设置初始值
 	public void setStartValue(long startValue) {
 		this.startValue = startValue;
-		this.maxValue = maxValue - startValue;
-		this.currentValue = currentValue - startValue;
-		this.isFirstInitStartValue = true;
+		this.maxValue = getMaxValue() - startValue;
+		this.currentValue = getCurrentValue() - startValue;
 	}
 
 	// 设置当前值
 	public void setCurrentValue(long currentValue) {
-		if (isFirstInitStartValue) this.currentValue = currentValue - startValue;
-		else this.currentValue = currentValue;
+		this.currentValue = currentValue - startValue;
 		postInvalidate();
+	}
+
+	// 获取起始值
+	public long getStartValue() {
+		return startValue;
+	}
+
+	// 获取当前值
+	public long getCurrentValue() {
+		return currentValue + startValue;
+	}
+
+	// 获取最大值
+	public long getMaxValue() {
+		return maxValue + startValue;
 	}
 
 	@SuppressLint("ClickableViewAccessibility") @Override public boolean onTouchEvent(MotionEvent event) {

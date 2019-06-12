@@ -234,9 +234,9 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		timeBar5.setMaxDuration(maxDuration);
 		timeBar6.setMaxDuration(maxDuration);
 		timeBar7.setMaxDuration(maxDuration);
-//		timeBar8.setCurrentValue(-30);
-//		timeBar8.setMaxValue(100);
-//		timeBar8.setStartValue(-40);
+		timeBar8.setMaxValue(100);
+		timeBar8.setCurrentValue(-30);
+		timeBar8.setStartValue(-40);
 
 		timeBar1.setSeekListener(this);
 		timeBar2.setSeekListener(this);

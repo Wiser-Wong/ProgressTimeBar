@@ -579,6 +579,21 @@ public class ProgressTimeBar extends View {
 		postInvalidate();
 	}
 
+	// 获取最大时间
+	public long getMaxDuration() {
+		return maxDuration;
+	}
+
+	// 获取当前时间
+	public long getCurrentDuration() {
+		return currentDuration;
+	}
+
+	// 获取缓冲时间
+	public long getBufferDuration() {
+		return bufferDuration;
+	}
+
 	// 获取文字宽高
 	private int[] getTextValue(Paint paint, String text) {
 		int[] values = new int[2];
