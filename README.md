@@ -1,6 +1,9 @@
 # ProgressTimeBar
 万能进度条ProgressTimeBar
 
+## 截图
+![images](https://github.com/Wiser-Wong/ProgressTimeBar/blob/master/images/timebar.gif)
+
 ## 环境配置
     allprojects {
 		repositories {
@@ -173,5 +176,3 @@
 * progressStartValue：进度条区间起始值
 * progressMaxValue：进度条最大值
 
-## 截图
-![images](https://github.com/Wiser-Wong/ProgressTimeBar/blob/master/images/timebar.gif)
