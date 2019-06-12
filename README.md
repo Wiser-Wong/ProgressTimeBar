@@ -68,11 +68,11 @@
 
 * ProgressValueBar
   	
+		提示：最大值、区间起始值以及当前值都可在XML中配置
 		设置区间起始值
-    	progressValueBar.setStartValue(startValue)
+    	progressValueBar.setStartValue(startValue);
      	设置最大值
         progressValueBar.setMaxValue(maxValue);
-	
         设置当前值
         progressValueBar.setCurrentValue(currentValue);
 	
