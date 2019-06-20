@@ -154,7 +154,7 @@ public class ProgressTimeBar extends View {
 
 	private int				playStartColor, playCenterColor, playEndColor;					// 播放渐变颜色值
 
-	private boolean			isCanClick;														// 是否能点击
+	private boolean			isCanClick						= true;							// 是否能点击
 
 	public ProgressTimeBar(Context context) {
 		super(context);
