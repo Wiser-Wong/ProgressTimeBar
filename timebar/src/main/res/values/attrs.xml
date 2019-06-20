@@ -35,6 +35,7 @@
         <attr name="progressPlayCenterColor" format="color|reference" />
         <attr name="progressPlayEndColor" format="color|reference" />
         <attr name="progressIsHasPlayProgress" format="boolean" />
+        <attr name="progressIsCanClick" format="boolean" />
     </declare-styleable>
 
     <!-- 万能进度条-->
@@ -62,6 +63,7 @@
         <attr name="progressCurrentValue" format="integer" />
         <attr name="progressStartValue" format="integer" />
         <attr name="progressValueIsHasPlayProgress" format="boolean" />
+        <attr name="progressValueIsCanClick" format="boolean" />
     </declare-styleable>
 
 </resources>

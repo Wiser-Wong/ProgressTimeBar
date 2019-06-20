@@ -110,6 +110,8 @@ public class ProgressValueBar extends View {
 
 	private int				playStartColor, playCenterColor, playEndColor;					// 播放渐变颜色值
 
+	private boolean			isCanClick;														// 是否能点击
+
 	public ProgressValueBar(Context context) {
 		super(context);
 		init(context, null);
@@ -125,7 +127,6 @@ public class ProgressValueBar extends View {
 		setLayerType(View.LAYER_TYPE_SOFTWARE, null); // 关闭硬件加速
 		this.setWillNotDraw(false); // 调用此方法后，才会执行 onDraw(Canvas) 方法
 
-		@SuppressLint("CustomViewStyleable")
 		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ProgressValueBar);
 		progressUnPlayColor = typedArray.getColor(R.styleable.ProgressValueBar_progressValueUnPlayColor, getResources().getColor(android.R.color.white));
 		progressPlayColor = typedArray.getColor(R.styleable.ProgressValueBar_progressValuePlayColor, getResources().getColor(android.R.color.holo_blue_dark));
@@ -134,6 +135,7 @@ public class ProgressValueBar extends View {
 		barShadowColor = typedArray.getColor(R.styleable.ProgressValueBar_progressValueBarShadowColor, getResources().getColor(android.R.color.white));
 		isHasBar = typedArray.getBoolean(R.styleable.ProgressValueBar_progressValueIsHasBar, isHasBar);
 		isHasPlayProgress = typedArray.getBoolean(R.styleable.ProgressValueBar_progressValueIsHasPlayProgress, isHasPlayProgress);
+		isCanClick = typedArray.getBoolean(R.styleable.ProgressValueBar_progressValueIsCanClick, isHasPlayProgress);
 		int barSrcId = typedArray.getResourceId(R.styleable.ProgressValueBar_progressValueBarSrc, -1);
 		int unPlaySrcId = typedArray.getResourceId(R.styleable.ProgressValueBar_progressValueUnPlaySrc, -1);
 		int playSrcId = typedArray.getResourceId(R.styleable.ProgressValueBar_progressValuePlaySrc, -1);
@@ -457,6 +459,7 @@ public class ProgressValueBar extends View {
 	}
 
 	@SuppressLint("ClickableViewAccessibility") @Override public boolean onTouchEvent(MotionEvent event) {
+		if (!isCanClick) return super.onTouchEvent(event);
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 				downTouch();

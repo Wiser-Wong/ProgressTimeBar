@@ -290,7 +290,8 @@
             app:progressValueUnPlayEndColor="#ffff00"
             app:progressValueBarSrc="@mipmap/play"
             app:progressValueUnPlaySrc="@drawable/progress_unplay_bg"
-            app:progressValueUnPlayStartColor="@color/colorAccent" />
+            app:progressValueUnPlayStartColor="@color/colorAccent"
+            app:progressValueIsCanClick="false"/>
 
         <Button
             android:id="@+id/btn_play"

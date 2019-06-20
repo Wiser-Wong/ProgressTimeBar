@@ -154,6 +154,8 @@ public class ProgressTimeBar extends View {
 
 	private int				playStartColor, playCenterColor, playEndColor;					// 播放渐变颜色值
 
+	private boolean			isCanClick;														// 是否能点击
+
 	public ProgressTimeBar(Context context) {
 		super(context);
 		init(context, null);
@@ -181,6 +183,7 @@ public class ProgressTimeBar extends View {
 		isHasBar = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBar, isHasBar);
 		isHasBuffer = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBuffer, isHasBuffer);
 		isHasPlayProgress = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasPlayProgress, isHasPlayProgress);
+		isCanClick = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsCanClick, isHasPlayProgress);
 		int barSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBarSrc, -1);
 		int unPlaySrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressUnPlaySrc, -1);
 		int bufferSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBufferSrc, -1);
@@ -627,6 +630,7 @@ public class ProgressTimeBar extends View {
 	}
 
 	@SuppressLint("ClickableViewAccessibility") @Override public boolean onTouchEvent(MotionEvent event) {
+		if (!isCanClick) return super.onTouchEvent(event);
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 				downTouch();
