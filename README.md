@@ -3,6 +3,7 @@
 
 ## 截图
 ![images](https://github.com/Wiser-Wong/ProgressTimeBar/blob/master/images/timebar.gif)
+![images](https://github.com/Wiser-Wong/ProgressTimeBar/blob/master/images/progress.gif)
 
 ## 环境配置
     allprojects {
@@ -30,7 +31,6 @@
     
         设置拖动bar进度监听
         timeBar.setSeekListener(this);
-	
 	
         <com.wiser.timebar.ProgressTimeBar
             android:id="@+id/timeBar"
@@ -82,7 +82,6 @@
         设置拖动bar进度监听
         progressValueBar.setSeekListener(this);
 	
-	
         <com.wiser.timebar.ProgressValueBar
             android:id="@+id/valueBar"
             android:layout_width="match_parent"
@@ -111,6 +110,21 @@
             app:progressValueBarSrc="@mipmap/play"
             app:progressValueUnPlaySrc="@drawable/progress_unplay_bg"
             app:progressValueUnPlayStartColor="@color/colorAccent" />
+
+* ProgressValueColor
+          
+	  //设置颜色以及颜色对应值
+	  valueColor.setColorValues(new int[]{Color.RED,Color.BLUE,Color.YELLOW},new int[]{100,40,70});
+	  
+      <com.wiser.timebar.ProgressValueColor
+            android:id="@+id/value_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="10dp"
+            app:progressValueColorHeight="15dp"
+            app:progressValueColorRoundRadius="6dp"/>
+
 
 ## 操作手册
 
@@ -175,4 +189,8 @@
 * progressCurrentValue：进度条当前进度值
 * progressStartValue：进度条区间起始值
 * progressMaxValue：进度条最大值
+
+### ProgressValueColor
+* progressValueColorHeight：进度条高度
+* progressValueColorRoundRadius：进度条弧度半径
 
