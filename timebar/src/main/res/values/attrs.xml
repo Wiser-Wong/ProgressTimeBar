@@ -65,5 +65,10 @@
         <attr name="progressValueIsHasPlayProgress" format="boolean" />
         <attr name="progressValueIsCanClick" format="boolean" />
     </declare-styleable>
+    <!-- 万能进度条-->
+    <declare-styleable name="ProgressValueColor">
+        <attr name="progressValueColorHeight" format="dimension|reference" />
+        <attr name="progressValueColorRoundRadius" format="dimension|reference" />
+    </declare-styleable>
 
 </resources>

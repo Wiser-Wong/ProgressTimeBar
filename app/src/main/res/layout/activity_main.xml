@@ -15,6 +15,24 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="5dp"
+            android:text="分段显示颜色进度"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressValueColor
+            android:id="@+id/value_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="10dp"
+            app:progressValueColorHeight="15dp"
+            app:progressValueColorRoundRadius="6dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
             android:text="发光Bar并且带缓冲的进度条"
             android:textColor="@color/colorAccent"
             android:textSize="14sp" />
@@ -275,23 +293,23 @@
             app:progressValueBarHeight="20dp"
             app:progressValueBarShadowColor="#ffff00"
             app:progressValueBarShadowPadding="10dp"
+            app:progressValueBarSrc="@mipmap/play"
             app:progressValueHeight="10dp"
             app:progressValueIsBarShadow="true"
+            app:progressValueIsCanClick="false"
             app:progressValueIsHasBar="true"
             app:progressValueIsHasPlayProgress="true"
             app:progressValuePlayCenterColor="#E0E0E0"
             app:progressValuePlayColor="#000000"
             app:progressValuePlayEndColor="#D2691E"
-            app:progressValuePlayStartColor="#0000EE"
             app:progressValuePlaySrc="@drawable/progress_buffer_play_bg"
+            app:progressValuePlayStartColor="#0000EE"
             app:progressValueRoundRadius="3dp"
             app:progressValueUnPlayCenterColor="@color/colorPrimary"
             app:progressValueUnPlayColor="#00ffff"
             app:progressValueUnPlayEndColor="#ffff00"
-            app:progressValueBarSrc="@mipmap/play"
             app:progressValueUnPlaySrc="@drawable/progress_unplay_bg"
-            app:progressValueUnPlayStartColor="@color/colorAccent"
-            app:progressValueIsCanClick="false"/>
+            app:progressValueUnPlayStartColor="@color/colorAccent" />
 
         <Button
             android:id="@+id/btn_play"

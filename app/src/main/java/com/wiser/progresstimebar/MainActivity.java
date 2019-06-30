@@ -1,5 +1,6 @@
 package com.wiser.progresstimebar;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.wiser.timebar.ProgressTimeBar;
 import com.wiser.timebar.ProgressValueBar;
+import com.wiser.timebar.ProgressValueColor;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 	private long				currentDuration	= 0;	// 当前时间
 
 	private long				bufferDuration	= 0;	// 缓冲时间
+
+	private ProgressValueColor	valueColor;
 
 	private ProgressTimeBar		timeBar1;
 
@@ -97,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 	@Override public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btn_play:// 播放
+				valueColor.setColorValues(new int[]{Color.GREEN,Color.BLUE},new int[]{100,40});
 				if (isPause) {
 					tvPlayState.setText("播放中");
 					isPause = false;
@@ -214,6 +219,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		valueColor = findViewById(R.id.value_color);
 		timeBar1 = findViewById(R.id.timeBar1);
 		timeBar2 = findViewById(R.id.timeBar2);
 		timeBar3 = findViewById(R.id.timeBar3);
@@ -249,6 +255,8 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 
 		btnPlay.setOnClickListener(this);
 		btnPause.setOnClickListener(this);
+
+		valueColor.setColorValues(new int[]{Color.RED,Color.BLUE,Color.YELLOW},new int[]{100,40,70});
 
 		timeHandler = new TimeHandler(this);
 

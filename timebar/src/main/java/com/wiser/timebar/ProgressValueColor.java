@@ -1,0 +1,162 @@
+package com.wiser.timebar;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.RectF;
+import android.support.annotation.ColorRes;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
+import android.view.View;
+
+/**
+ * @author Wiser
+ * 
+ *         进度Color分割
+ */
+public class ProgressValueColor extends View {
+
+	private int				color			= Color.GRAY;	// 默认颜色
+
+	private float			progressHeight	= 14;			// 进度条高度
+
+	private float			progressRoundRadius;			// 进度圆弧
+
+	private RectF			progressRectF;					// 进度条矩阵
+
+	private Paint			progressPaint;					// 进度条画笔
+
+	private Path[]			paths;
+
+	private RectF[]			rectFS;
+
+	private @ColorRes int[]	colors;
+
+	private int[]			values;
+
+	private boolean			isFirst			= true;
+
+	public ProgressValueColor(Context context) {
+		super(context);
+		init(context, null);
+	}
+
+	public ProgressValueColor(Context context, @Nullable AttributeSet attrs) {
+		super(context, attrs);
+		init(context, attrs);
+	}
+
+	private void init(Context context, AttributeSet attrs) {
+		setLayerType(View.LAYER_TYPE_SOFTWARE, null); // 关闭硬件加速
+		this.setWillNotDraw(false); // 调用此方法后，才会执行 onDraw(Canvas) 方法
+
+		if (attrs != null) {
+			TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ProgressValueColor);
+			progressHeight = typedArray.getDimension(R.styleable.ProgressValueColor_progressValueColorHeight, progressHeight);
+			progressRoundRadius = typedArray.getDimension(R.styleable.ProgressValueColor_progressValueColorRoundRadius, 0);
+			typedArray.recycle();
+		}
+
+		initPaint();
+	}
+
+	private void initPaint() {
+		progressPaint = new Paint();
+		progressPaint.setStyle(Paint.Style.FILL);
+		progressPaint.setAntiAlias(true);
+		progressPaint.setColor(color);
+		progressPaint.setTextAlign(Paint.Align.CENTER);
+
+		progressRectF = new RectF();
+	}
+
+	@Override protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
+		progressPaint.setColor(color);
+		canvas.drawRoundRect(progressRectF, progressRoundRadius, progressRoundRadius, progressPaint);
+
+		if (paths == null || paths.length == 0 || colors == null || colors.length == 0 || paths.length != colors.length) return;
+		for (int i = 0; i < paths.length; i++) {
+			progressPaint.setColor(colors[i]);
+			canvas.drawPath(paths[i], progressPaint);
+		}
+	}
+
+	@Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+		int width = right - left;
+		progressRectF.set(getPaddingLeft(), getPaddingTop(), width - getPaddingRight(), getPaddingBottom() + progressHeight);
+		setColorValues(colors, values);
+	}
+
+	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+		int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+		int height = (int) (heightMode == MeasureSpec.UNSPECIFIED ? (progressHeight + getPaddingTop() + getPaddingBottom())
+				: heightMode == MeasureSpec.EXACTLY ? heightSize : Math.min(progressHeight + getPaddingTop() + getPaddingBottom(), heightSize));
+		setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), height);
+	}
+
+	/**
+	 * 设置分段颜色
+	 * 
+	 * @param colors
+	 *            颜色数组
+	 * @param values
+	 *            值数组
+	 */
+	public void setColorValues(@ColorRes int[] colors, int[] values) {
+		if (colors == null || values == null || values.length == 0 || colors.length != values.length) {
+			return;
+		}
+		this.colors = colors;
+		this.values = values;
+		if (isFirst) {
+			isFirst = false;
+			return;
+		}
+		if (paths == null) paths = new Path[values.length];
+		else {
+			paths = null;
+			paths = new Path[values.length];
+		}
+		if (rectFS == null) rectFS = new RectF[values.length];
+		else {
+			rectFS = null;
+			rectFS = new RectF[values.length];
+		}
+		int maxValue = 0;
+		for (int i = 0; i < values.length; i++) {
+			paths[i] = new Path();
+			rectFS[i] = new RectF();
+			maxValue += values[i];
+		}
+
+		for (int i = 0; i < rectFS.length; i++) {
+			if (i == 0) rectFS[i].set(progressRectF.left, progressRectF.top, progressRectF.left + (values[i] * (progressRectF.right - progressRectF.left) / maxValue), progressRectF.bottom);
+			else if (i == rectFS.length - 1) rectFS[i].set(rectFS[i - 1].right, progressRectF.top, progressRectF.right, progressRectF.bottom);
+			else rectFS[i].set(rectFS[i - 1].right, progressRectF.top, rectFS[i - 1].right + (values[i] * (progressRectF.right - progressRectF.left) / maxValue), progressRectF.bottom);
+
+			if (i == 0 && i == rectFS.length - 1) paths[i].addRoundRect(rectFS[i], new float[] { progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius,
+					progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius }, Path.Direction.CCW);
+			else if (i == 0) paths[i].addRoundRect(rectFS[i], new float[] { progressRoundRadius, progressRoundRadius, 0, 0, 0, 0, progressRoundRadius, progressRoundRadius }, Path.Direction.CCW);
+			else if (i == rectFS.length - 1)
+				paths[i].addRoundRect(rectFS[i], new float[] { 0, 0, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, 0, 0 }, Path.Direction.CCW);
+			else paths[i].addRoundRect(rectFS[i], 0, 0, Path.Direction.CW);
+		}
+
+		postInvalidate();
+	}
+
+	@Override protected void onDetachedFromWindow() {
+		super.onDetachedFromWindow();
+		progressRectF = null;
+		progressPaint = null;
+		paths = null;
+		rectFS = null;
+		colors = null;
+		values = null;
+	}
+}

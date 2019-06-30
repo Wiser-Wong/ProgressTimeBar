@@ -1,5 +1,10 @@
 package com.wiser.timebar;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -16,12 +21,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
-import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * @author Wiser
@@ -171,40 +170,42 @@ public class ProgressTimeBar extends View {
 		setLayerType(View.LAYER_TYPE_SOFTWARE, null); // 关闭硬件加速
 		this.setWillNotDraw(false); // 调用此方法后，才会执行 onDraw(Canvas) 方法
 
-		@SuppressLint("CustomViewStyleable")
-		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ProgressTimeBar);
-		timeColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressTimeColor, getResources().getColor(android.R.color.white));
-		progressUnPlayColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayColor, getResources().getColor(android.R.color.white));
-		progressPlayColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressPlayColor, getResources().getColor(android.R.color.holo_blue_dark));
-		progressBufferColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferColor, getResources().getColor(android.R.color.darker_gray));
-		barColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBarColor, getResources().getColor(android.R.color.holo_green_dark));
-		isBarShadow = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsBarShadow, isBarShadow);
-		barShadowColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBarShadowColor, getResources().getColor(android.R.color.white));
-		isHasBar = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBar, isHasBar);
-		isHasBuffer = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBuffer, isHasBuffer);
-		isHasPlayProgress = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasPlayProgress, isHasPlayProgress);
-		isCanClick = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsCanClick, isHasPlayProgress);
-		int barSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBarSrc, -1);
-		int unPlaySrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressUnPlaySrc, -1);
-		int bufferSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBufferSrc, -1);
-		int playSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressPlaySrc, -1);
-		timeTextSize = typedArray.getDimension(R.styleable.ProgressTimeBar_progressTimeTextSize, timeTextSize);
-		barShadowPadding = typedArray.getDimension(R.styleable.ProgressTimeBar_progressBarShadowPadding, barShadowPadding);
-		progressTimePadding = typedArray.getDimension(R.styleable.ProgressTimeBar_progressTimePadding, progressTimePadding);
-		progressHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressHeight, progressHeight);
-		barHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressBarHeight, barHeight);
-		progressRoundRadius = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressRoundRadius, progressRoundRadius);
-		timeBarMode = typedArray.getInt(R.styleable.ProgressTimeBar_progressTimeMode, NO_HAS_TIME);
-		unPlayStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
-		unPlayCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
-		unPlayEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayEndColor, 0);
-		bufferStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferStartColor, 0);
-		bufferCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferCenterColor, 0);
-		bufferEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferEndColor, 0);
-		playStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
-		playCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
-		playEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayEndColor, 0);
-		typedArray.recycle();
+		int barSrcId = 0, unPlaySrcId = 0, bufferSrcId = 0, playSrcId = 0;
+		if (attrs != null) {
+			TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ProgressTimeBar);
+			timeColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressTimeColor, getResources().getColor(android.R.color.white));
+			progressUnPlayColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayColor, getResources().getColor(android.R.color.white));
+			progressPlayColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressPlayColor, getResources().getColor(android.R.color.holo_blue_dark));
+			progressBufferColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferColor, getResources().getColor(android.R.color.darker_gray));
+			barColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBarColor, getResources().getColor(android.R.color.holo_green_dark));
+			isBarShadow = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsBarShadow, isBarShadow);
+			barShadowColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBarShadowColor, getResources().getColor(android.R.color.white));
+			isHasBar = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBar, isHasBar);
+			isHasBuffer = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBuffer, isHasBuffer);
+			isHasPlayProgress = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasPlayProgress, isHasPlayProgress);
+			isCanClick = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsCanClick, isHasPlayProgress);
+			barSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBarSrc, -1);
+			unPlaySrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressUnPlaySrc, -1);
+			bufferSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBufferSrc, -1);
+			playSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressPlaySrc, -1);
+			timeTextSize = typedArray.getDimension(R.styleable.ProgressTimeBar_progressTimeTextSize, timeTextSize);
+			barShadowPadding = typedArray.getDimension(R.styleable.ProgressTimeBar_progressBarShadowPadding, barShadowPadding);
+			progressTimePadding = typedArray.getDimension(R.styleable.ProgressTimeBar_progressTimePadding, progressTimePadding);
+			progressHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressHeight, progressHeight);
+			barHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressBarHeight, barHeight);
+			progressRoundRadius = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressRoundRadius, progressRoundRadius);
+			timeBarMode = typedArray.getInt(R.styleable.ProgressTimeBar_progressTimeMode, NO_HAS_TIME);
+			unPlayStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
+			unPlayCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
+			unPlayEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayEndColor, 0);
+			bufferStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferStartColor, 0);
+			bufferCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferCenterColor, 0);
+			bufferEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferEndColor, 0);
+			playStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
+			playCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
+			playEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayEndColor, 0);
+			typedArray.recycle();
+		}
 
 		initPaint();
 
@@ -642,7 +643,6 @@ public class ProgressTimeBar extends View {
 				if (!isHasBar) isPressBar = false;
 				if (isPressBar) {
 					pressBarPlayDuration = this.currentDuration;
-					Toast.makeText(getContext(), "游标", Toast.LENGTH_SHORT).show();
 					if (seekListener != null) {
 						seekListener.startDraggingBar(this, pressBarPlayDuration);
 					}
