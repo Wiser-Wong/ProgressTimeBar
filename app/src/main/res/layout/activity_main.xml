@@ -26,7 +26,9 @@
             android:background="#000000"
             android:padding="10dp"
             app:progressValueColorHeight="15dp"
-            app:progressValueColorRoundRadius="6dp"/>
+            app:progressValueColorRoundRadius="6dp"
+            app:progressValueColorBackgroundColor="@color/colorPrimary"
+            app:progressValueColorMaxValue="400.90"/>
 
         <TextView
             android:layout_width="match_parent"

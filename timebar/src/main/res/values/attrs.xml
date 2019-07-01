@@ -69,6 +69,8 @@
     <declare-styleable name="ProgressValueColor">
         <attr name="progressValueColorHeight" format="dimension|reference" />
         <attr name="progressValueColorRoundRadius" format="dimension|reference" />
+        <attr name="progressValueColorBackgroundColor" format="color|reference" />
+        <attr name="progressValueColorMaxValue" format="float" />
     </declare-styleable>
 
 </resources>

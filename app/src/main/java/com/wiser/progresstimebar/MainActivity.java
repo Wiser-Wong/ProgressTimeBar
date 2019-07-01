@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 	@Override public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btn_play:// 播放
-				valueColor.setColorValues(new int[]{Color.GREEN,Color.BLUE},new int[]{100,40});
+				valueColor.setColorValues(new int[]{Color.GREEN,Color.BLUE},new float[]{100,40},140);
 				if (isPause) {
 					tvPlayState.setText("播放中");
 					isPause = false;
@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		btnPlay.setOnClickListener(this);
 		btnPause.setOnClickListener(this);
 
-		valueColor.setColorValues(new int[]{Color.RED,Color.BLUE,Color.YELLOW},new int[]{100,40,70});
+		valueColor.setColorValues(new int[]{Color.RED,Color.BLUE,Color.YELLOW},new float[]{99.5550f,40.4450f,70});
 
 		timeHandler = new TimeHandler(this);
 
