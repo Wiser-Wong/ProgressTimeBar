@@ -71,13 +71,17 @@
 
 * ProgressValueBar
   	
-		提示：最大值、区间起始值以及当前值都可在XML中配置
-		设置区间起始值
-    	progressValueBar.setStartValue(startValue);
-     	设置最大值
-        progressValueBar.setMaxValue(maxValue);
-        设置当前值
-        progressValueBar.setCurrentValue(currentValue);
+ #### tip
+  * 最大值、区间起始值以及当前值都可在XML中配置
+  * 初始值可为负数值
+  * 当前值必须在初始值和最大值之间
+  
+	    设置区间起始值
+    	    progressValueBar.setStartValue(startValue);
+     	    设置最大值
+            progressValueBar.setMaxValue(maxValue);
+            设置当前值
+            progressValueBar.setCurrentValue(currentValue);
 	
         设置拖动bar进度监听
         progressValueBar.setSeekListener(this);
