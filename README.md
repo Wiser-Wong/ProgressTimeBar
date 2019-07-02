@@ -14,7 +14,7 @@
 	}
     
     dependencies {
-	        implementation 'com.github.Wiser-Wong:ProgressTimeBar:1.9'
+	        implementation 'com.github.Wiser-Wong:ProgressTimeBar:2.0'
 	}
 
 
@@ -71,13 +71,17 @@
 
 * ProgressValueBar
   	
-		提示：最大值、区间起始值以及当前值都可在XML中配置
-		设置区间起始值
-    	progressValueBar.setStartValue(startValue);
-     	设置最大值
-        progressValueBar.setMaxValue(maxValue);
-        设置当前值
-        progressValueBar.setCurrentValue(currentValue);
+  #### tip
+  * 最大值、区间起始值以及当前值都可在XML中配置
+  * 初始值可为负数值
+  * 当前值必须在初始值和最大值之间
+  
+	    设置区间起始值
+    	    progressValueBar.setStartValue(startValue);
+     	    设置最大值
+            progressValueBar.setMaxValue(maxValue);
+            设置当前值
+            progressValueBar.setCurrentValue(currentValue);
 	
         设置拖动bar进度监听
         progressValueBar.setSeekListener(this);
@@ -112,18 +116,27 @@
             app:progressValueUnPlayStartColor="@color/colorAccent" />
 
 * ProgressValueColor
-          
-	  //设置颜色以及颜色对应值
-	  valueColor.setColorValues(new int[]{Color.RED,Color.BLUE,Color.YELLOW},new int[]{100,40,70});
-	  
-      <com.wiser.timebar.ProgressValueColor
-            android:id="@+id/value_color"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#000000"
-            android:padding="10dp"
-            app:progressValueColorHeight="15dp"
-            app:progressValueColorRoundRadius="6dp"/>
+  
+  #### tip
+  * 设置的颜色数组需要与值数组长度相对应
+  * 设置的值数组中不能出现负数值
+  * 设置的值数组中总值不能大于最大值
+
+		//设置颜色以及颜色对应值 tip:需要在xml布局中设置progressValueColorMaxValue 最大
+		valueColor.setColorValues(new int[]{Color.RED,Color.BLUE,Color.YELLOW},new float[]{99.5550f,40.4450f,70});
+		  //设置颜色以及颜色对应值 tip:不需要在xml中设置最大值属性，最后一位参数是最大值
+		  valueColor.setColorValues(new int[]{Color.RED,Color.BLUE,Color.YELLOW},new float[]{99.5550f,40.4450f,70},210);
+
+	    <com.wiser.timebar.ProgressValueColor
+		    android:id="@+id/value_color"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="#000000"
+		    android:padding="10dp"
+		    app:progressValueColorHeight="15dp"
+		    app:progressValueColorRoundRadius="6dp"
+		    app:progressValueColorBackgroundColor="@color/colorPrimary"
+		    app:progressValueColorMaxValue="400.90"/>
 
 
 ## 操作手册
@@ -193,4 +206,6 @@
 ### ProgressValueColor
 * progressValueColorHeight：进度条高度
 * progressValueColorRoundRadius：进度条弧度半径
+* progressValueColorBackgroundColor：进度条默认背景色
+* progressValueColorMaxValue：进度条最大值
 
