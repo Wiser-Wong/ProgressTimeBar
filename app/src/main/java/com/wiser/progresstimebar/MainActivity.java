@@ -49,7 +49,9 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 
 	private ProgressTimeBar		timeBar7;
 
-	private ProgressValueBar	timeBar8;
+	private ProgressValueBar	valueBar1;
+
+	private ProgressValueBar	valueBar2;
 
 	private Button				btnPlay;
 
@@ -101,7 +103,8 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 	@Override public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btn_play:// 播放
-				valueColor.setColorValues(new int[]{Color.GREEN,Color.BLUE},new float[]{100,40},140);
+				valueColor.setColorValues(new int[] { Color.GREEN, Color.BLUE }, new float[] { 100, 40 }, 140);
+				valueBar2.updateLinearGradient(ProgressValueBar.PLAY_MODE,Color.YELLOW,Color.GREEN,Color.RED);
 				if (isPause) {
 					tvPlayState.setText("播放中");
 					isPause = false;
@@ -227,7 +230,8 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		timeBar5 = findViewById(R.id.timeBar5);
 		timeBar6 = findViewById(R.id.timeBar6);
 		timeBar7 = findViewById(R.id.timeBar7);
-		timeBar8 = findViewById(R.id.timeBar8);
+		valueBar1 = findViewById(R.id.valueBar1);
+		valueBar2 = findViewById(R.id.valueBar2);
 
 		btnPlay = findViewById(R.id.btn_play);
 		btnPause = findViewById(R.id.btn_pause);
@@ -240,9 +244,9 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		timeBar5.setMaxDuration(maxDuration);
 		timeBar6.setMaxDuration(maxDuration);
 		timeBar7.setMaxDuration(maxDuration);
-		timeBar8.setMaxValue(100);
-		timeBar8.setCurrentValue(-30);
-		timeBar8.setStartValue(-40);
+		valueBar1.setMaxValue(100);
+		valueBar1.setCurrentValue(-30);
+		valueBar1.setStartValue(-40);
 
 		timeBar1.setSeekListener(this);
 		timeBar2.setSeekListener(this);
@@ -251,12 +255,12 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		timeBar5.setSeekListener(this);
 		timeBar6.setSeekListener(this);
 		timeBar7.setSeekListener(this);
-		timeBar8.setSeekListener(this);
+		valueBar1.setSeekListener(this);
 
 		btnPlay.setOnClickListener(this);
 		btnPause.setOnClickListener(this);
 
-		valueColor.setColorValues(new int[]{Color.RED,Color.BLUE,Color.YELLOW},new float[]{99.5550f,40.4450f,70});
+		valueColor.setColorValues(new int[] { Color.RED, Color.BLUE, Color.YELLOW }, new float[] { 99.5550f, 40.4450f, 70 });
 
 		timeHandler = new TimeHandler(this);
 

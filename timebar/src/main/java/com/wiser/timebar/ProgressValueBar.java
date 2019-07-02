@@ -24,6 +24,10 @@ import android.widget.Toast;
  */
 public class ProgressValueBar extends View {
 
+	public static final int	UNPLAY_MODE						= 1;							// 未播放进度mode
+
+	public static final int	PLAY_MODE						= 2;							// 播放进度mode
+
 	private final int		CANVAS_BAR_COLOR				= 10;							// 绘制Bar颜色
 
 	private final int		CANVAS_BAR_DRAWABLE				= 11;							// 绘制BarDrawable
@@ -342,8 +346,8 @@ public class ProgressValueBar extends View {
 	@Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
 		// 设置渐变
-		setLinearGradient(1, unPlayStartColor, unPlayCenterColor, unPlayEndColor);
-		setLinearGradient(2, playStartColor, playCenterColor, playEndColor);
+		setLinearGradient(UNPLAY_MODE, unPlayStartColor, unPlayCenterColor, unPlayEndColor);
+		setLinearGradient(PLAY_MODE, playStartColor, playCenterColor, playEndColor);
 	}
 
 	// 设置渐变以及计算color以及权重
@@ -382,11 +386,11 @@ public class ProgressValueBar extends View {
 				break;
 		}
 		switch (mode) {
-			case 1:
+			case UNPLAY_MODE:
 				linearGradientUnPlay = new LinearGradient(0, 0, getMeasuredWidth(), 0, gradientColors, weights, Shader.TileMode.CLAMP);
 				progressUnPlayPaint.setShader(linearGradientUnPlay);
 				break;
-			case 2:
+			case PLAY_MODE:
 				linearGradientPlay = new LinearGradient(0, 0, getMeasuredWidth(), 0, gradientColors, weights, Shader.TileMode.CLAMP);
 				progressPlayPaint.setShader(linearGradientPlay);
 				break;
@@ -426,6 +430,12 @@ public class ProgressValueBar extends View {
 		}
 		if (rectRight >= (progressUnPlayRect.right - progressUnPlayRect.left - barHeight)) return progressUnPlayRect.right - progressUnPlayRect.left - barHeight;
 		return rectRight;
+	}
+
+	// 更新渐变
+	public void updateLinearGradient(int mode, int startColor, int centerColor, int endColor) {
+		setLinearGradient(mode, startColor, centerColor, endColor);
+		postInvalidate();
 	}
 
 	// 设置总值
@@ -560,7 +570,7 @@ public class ProgressValueBar extends View {
 
 	@Override protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
-//		detach();
+		// detach();
 	}
 
 	public void detach() {
