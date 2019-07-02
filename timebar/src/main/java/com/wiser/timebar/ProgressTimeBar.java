@@ -735,7 +735,7 @@ public class ProgressTimeBar extends View {
 //		detach();
 	}
 
-	private void detach() {
+	public void detach() {
 		progressBarPaint = null;
 		progressUnPlayPaint = null;
 		progressBufferPaint = null;

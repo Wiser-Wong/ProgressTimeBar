@@ -563,7 +563,7 @@ public class ProgressValueBar extends View {
 //		detach();
 	}
 
-	private void detach() {
+	public void detach() {
 		progressBarPaint = null;
 		progressUnPlayPaint = null;
 		progressPlayPaint = null;
