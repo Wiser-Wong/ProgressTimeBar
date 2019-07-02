@@ -732,7 +732,7 @@ public class ProgressTimeBar extends View {
 
 	@Override protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
-		detach();
+//		detach();
 	}
 
 	private void detach() {

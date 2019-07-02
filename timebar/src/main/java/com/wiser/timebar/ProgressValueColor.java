@@ -197,6 +197,10 @@ public class ProgressValueColor extends View {
 
 	@Override protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
+//		detach();
+	}
+
+	public void detach(){
 		progressRectF = null;
 		progressPaint = null;
 		paths = null;
@@ -204,4 +208,5 @@ public class ProgressValueColor extends View {
 		colors = null;
 		values = null;
 	}
+
 }
