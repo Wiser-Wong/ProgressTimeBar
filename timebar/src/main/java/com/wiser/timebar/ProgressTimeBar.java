@@ -183,7 +183,7 @@ public class ProgressTimeBar extends View {
 			isHasBar = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBar, isHasBar);
 			isHasBuffer = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasBuffer, isHasBuffer);
 			isHasPlayProgress = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsHasPlayProgress, isHasPlayProgress);
-			isCanClick = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsCanClick, isHasPlayProgress);
+			isCanClick = typedArray.getBoolean(R.styleable.ProgressTimeBar_progressIsCanClick, isCanClick);
 			barSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBarSrc, -1);
 			unPlaySrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressUnPlaySrc, -1);
 			bufferSrcId = typedArray.getResourceId(R.styleable.ProgressTimeBar_progressBufferSrc, -1);
