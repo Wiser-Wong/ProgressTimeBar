@@ -63,7 +63,9 @@
             app:progressInsideUnPlayStartColor="#ff00ff"
             app:progressInsideUnPlayCenterColor="#ffff00"
             app:progressInsideUnPlayEndColor="#00ffff"
-            app:progressInsideIsRadius="false"/>
+            app:progressInsideIsRadius="false"
+            app:progressInsideMaxProgress="1000"
+            app:progressInsideCurrentProgress="300"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -90,7 +92,10 @@
             app:progressTimeMode="HAS_TIME"
             app:progressTimePadding="30dp"
             app:progressTimeTextSize="15sp"
-            app:progressUnPlayColor="#f2f2f2" />
+            app:progressUnPlayColor="#f2f2f2"
+            app:progressMaxDuration="1000"
+            app:progressCurrentDuration="100"
+            app:progressBufferDuration="400"/>
 
         <TextView
             android:layout_width="match_parent"

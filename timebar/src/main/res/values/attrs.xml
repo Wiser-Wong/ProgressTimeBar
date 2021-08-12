@@ -36,6 +36,9 @@
         <attr name="progressPlayEndColor" format="color|reference" />
         <attr name="progressIsHasPlayProgress" format="boolean" />
         <attr name="progressIsCanClick" format="boolean" />
+        <attr name="progressMaxDuration" format="integer" />
+        <attr name="progressCurrentDuration" format="integer" />
+        <attr name="progressBufferDuration" format="integer" />
     </declare-styleable>
 
     <!-- 万能进度条-->
@@ -95,6 +98,8 @@
         <attr name="progressInsideTextPaddingEnd" format="dimension|reference" />
         <attr name="progressInsideTextPaddingBottom" format="dimension|reference" />
         <attr name="progressInsideIsRadius" format="boolean" />
+        <attr name="progressInsideMaxProgress" format="integer" />
+        <attr name="progressInsideCurrentProgress" format="integer" />
     </declare-styleable>
 
 </resources>

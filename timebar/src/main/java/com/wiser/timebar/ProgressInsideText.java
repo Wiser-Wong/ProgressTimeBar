@@ -45,9 +45,9 @@ public class ProgressInsideText extends View {
 
 	private Path			progressPlayPath;										// 进度条播放Path路径
 
-	private long			currentDuration;										// 当前时间
+	private long			currentProgress;										// 当前进度
 
-	private long			maxDuration;											// 总时间
+	private long			maxProgress;											// 总进度
 
 	private LinearGradient	linearGradientUnPlay;									// 未播放渐变组件
 
@@ -113,6 +113,8 @@ public class ProgressInsideText extends View {
 			playCenterColor = typedArray.getColor(R.styleable.ProgressInsideText_progressInsidePlayCenterColor, 0);
 			playEndColor = typedArray.getColor(R.styleable.ProgressInsideText_progressInsidePlayEndColor, 0);
 			isProgressRadius = typedArray.getBoolean(R.styleable.ProgressInsideText_progressInsideIsRadius, isProgressRadius);
+			maxProgress = typedArray.getInt(R.styleable.ProgressInsideText_progressInsideMaxProgress, 0);
+			currentProgress = typedArray.getInt(R.styleable.ProgressInsideText_progressInsideCurrentProgress, 0);
 			typedArray.recycle();
 		}
 
@@ -288,7 +290,7 @@ public class ProgressInsideText extends View {
 	private void refreshRect() {
 		progressPlayPath.reset();
 		progressUnPlayPath.reset();
-		progressPlayRect.right = progressUnPlayRect.left + this.currentDuration * (progressUnPlayRect.right - progressUnPlayRect.left) / maxDuration;
+		progressPlayRect.right = progressUnPlayRect.left + this.currentProgress * (progressUnPlayRect.right - progressUnPlayRect.left) / maxProgress;
 		progressUnPlayPath.addRoundRect(progressUnPlayRect,
 				new float[] { progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius },
 				Path.Direction.CW);
@@ -296,7 +298,8 @@ public class ProgressInsideText extends View {
 		if (isProgressRadius) {
 			radius = progressRoundRadius;
 		}
-		progressPlayPath.addRoundRect(progressPlayRect, new float[] { progressRoundRadius, progressRoundRadius, radius, radius, radius, radius, progressRoundRadius, progressRoundRadius }, Path.Direction.CW);
+		progressPlayPath.addRoundRect(progressPlayRect, new float[] { progressRoundRadius, progressRoundRadius, radius, radius, radius, radius, progressRoundRadius, progressRoundRadius },
+				Path.Direction.CW);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			progressPlayPath.op(progressUnPlayPath, Path.Op.INTERSECT); // 交集
 		}
@@ -323,25 +326,25 @@ public class ProgressInsideText extends View {
 	}
 
 	// 设置总时间
-	public void setMaxDuration(long maxDuration) {
-		this.maxDuration = maxDuration;
+	public void setMaxProgress(long maxProgress) {
+		this.maxProgress = maxProgress;
 	}
 
 	// 设置当前时间/当前显示的进度内文本内容
 	public void setCurrentDuration(long currentDuration, String text) {
-		this.currentDuration = currentDuration;
+		this.currentProgress = currentDuration;
 		this.progressInsideText = text;
 		postInvalidate();
 	}
 
 	// 获取最大时间
-	public long getMaxDuration() {
-		return maxDuration;
+	public long getMaxProgress() {
+		return maxProgress;
 	}
 
 	// 获取当前时间
-	public long getCurrentDuration() {
-		return currentDuration;
+	public long getCurrentProgress() {
+		return currentProgress;
 	}
 
 	// 获取文字宽高

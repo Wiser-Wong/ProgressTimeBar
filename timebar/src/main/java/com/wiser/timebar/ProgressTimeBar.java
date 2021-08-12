@@ -213,6 +213,9 @@ public class ProgressTimeBar extends View {
 			playStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressPlayStartColor, 0);
 			playCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressPlayCenterColor, 0);
 			playEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressPlayEndColor, 0);
+			maxDuration = typedArray.getInt(R.styleable.ProgressTimeBar_progressMaxDuration, 0);
+			currentDuration = typedArray.getInt(R.styleable.ProgressTimeBar_progressCurrentDuration, 0);
+			bufferDuration = typedArray.getInt(R.styleable.ProgressTimeBar_progressBufferDuration, 0);
 			typedArray.recycle();
 		}
 

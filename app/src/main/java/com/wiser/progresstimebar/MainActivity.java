@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		btnPause = findViewById(R.id.btn_pause);
 		tvPlayState = findViewById(R.id.tv_play_state);
 
-		progressText.setMaxDuration(maxDuration);
+		progressText.setMaxProgress(maxDuration);
 		timeBar0.setMaxDuration(maxDuration);
 		timeBar1.setMaxDuration(maxDuration);
 		timeBar2.setMaxDuration(maxDuration);
