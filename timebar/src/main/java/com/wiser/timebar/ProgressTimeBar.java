@@ -12,11 +12,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -93,7 +96,7 @@ public class ProgressTimeBar extends View {
 
 	private float			barHeight						= progressHeight + 14;			// bar的高度
 
-	private int				progressRoundRadius;											// 进度条矩形圆角半径
+	private float			progressRoundRadius;											// 进度条矩形圆角半径
 
 	private boolean			isBarShadow;													// 是否Bar有阴影
 
@@ -116,6 +119,12 @@ public class ProgressTimeBar extends View {
 	private RectF			lTimeRect;														// 左侧跟踪时间
 
 	private RectF			rTimeRect;														// 右侧总时间
+
+	private Path			progressUnPlayPath;												// 进度条未播放path
+
+	private Path			progressPlayPath;												// 进度条播放path
+
+	private Path			progressBufferPath;												// 进度条缓冲path
 
 	private long			currentDuration;												// 当前时间
 
@@ -193,7 +202,7 @@ public class ProgressTimeBar extends View {
 			progressTimePadding = typedArray.getDimension(R.styleable.ProgressTimeBar_progressTimePadding, progressTimePadding);
 			progressHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressHeight, progressHeight);
 			barHeight = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressBarHeight, barHeight);
-			progressRoundRadius = (int) typedArray.getDimension(R.styleable.ProgressTimeBar_progressRoundRadius, progressRoundRadius);
+			progressRoundRadius = typedArray.getDimension(R.styleable.ProgressTimeBar_progressRoundRadius, progressRoundRadius);
 			timeBarMode = typedArray.getInt(R.styleable.ProgressTimeBar_progressTimeMode, NO_HAS_TIME);
 			unPlayStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
 			unPlayCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
@@ -201,9 +210,9 @@ public class ProgressTimeBar extends View {
 			bufferStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferStartColor, 0);
 			bufferCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferCenterColor, 0);
 			bufferEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressBufferEndColor, 0);
-			playStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayStartColor, 0);
-			playCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayCenterColor, 0);
-			playEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressUnPlayEndColor, 0);
+			playStartColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressPlayStartColor, 0);
+			playCenterColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressPlayCenterColor, 0);
+			playEndColor = typedArray.getColor(R.styleable.ProgressTimeBar_progressPlayEndColor, 0);
 			typedArray.recycle();
 		}
 
@@ -214,6 +223,8 @@ public class ProgressTimeBar extends View {
 		initBarCanvasMode(barSrcId);
 
 		initRect();
+
+		initPath();
 	}
 
 	// 初始化画笔
@@ -327,12 +338,19 @@ public class ProgressTimeBar extends View {
 		rTimeRect = new RectF();
 	}
 
+	// 初始化Path
+	private void initPath() {
+		progressUnPlayPath = new Path();
+		progressPlayPath = new Path();
+		progressBufferPath = new Path();
+	}
+
 	@Override protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
 		canvas.save();
 
-		setRect();
+		refreshRect();
 
 		// 画时间
 		canvasTime(canvas);
@@ -341,8 +359,6 @@ public class ProgressTimeBar extends View {
 		canvasProgress(canvas);
 
 		canvas.restore();
-
-		// postInvalidate();
 	}
 
 	// 画进度条
@@ -350,7 +366,9 @@ public class ProgressTimeBar extends View {
 		// 画未播放进度
 		switch (progressUnPlayCanvasModel) {
 			case CANVAS_PROGRESS_UNPLAY_COLOR:
-				canvas.drawRoundRect(progressUnPlayRect, progressRoundRadius, progressRoundRadius, progressUnPlayPaint);
+				// canvas.drawRoundRect(progressUnPlayRect, progressRoundRadius,
+				// progressRoundRadius, progressUnPlayPaint);
+				canvas.drawPath(progressUnPlayPath, progressUnPlayPaint);
 				break;
 			case CANVAS_PROGRESS_UNPLAY_DRAWABLE:
 				unPlayDrawable.setBounds((int) progressUnPlayRect.left, (int) progressUnPlayRect.top, (int) progressUnPlayRect.right, (int) progressUnPlayRect.bottom);
@@ -363,7 +381,9 @@ public class ProgressTimeBar extends View {
 			switch (progressBufferCanvasModel) {
 				case CANVAS_PROGRESS_BUFFER_COLOR:
 					// 画缓冲进度
-					canvas.drawRoundRect(progressBufferRect, progressRoundRadius, progressRoundRadius, progressBufferPaint);
+					// canvas.drawRoundRect(progressBufferRect, progressRoundRadius,
+					// progressRoundRadius, progressBufferPaint);
+					canvas.drawPath(progressBufferPath, progressBufferPaint);
 					break;
 				case CANVAS_PROGRESS_BUFFER_DRAWABLE:
 					bufferDrawable.setBounds((int) progressBufferRect.left, (int) progressBufferRect.top, (int) progressBufferRect.right, (int) progressBufferRect.bottom);
@@ -376,7 +396,9 @@ public class ProgressTimeBar extends View {
 			// 画播放进度
 			switch (progressPlayCanvasModel) {
 				case CANVAS_PROGRESS_PLAY_COLOR:
-					canvas.drawRoundRect(progressPlayRect, progressRoundRadius, progressRoundRadius, progressPlayPaint);
+					// canvas.drawRoundRect(progressPlayRect, progressRoundRadius,
+					// progressRoundRadius, progressPlayPaint);
+					canvas.drawPath(progressPlayPath, progressPlayPaint);
 					break;
 				case CANVAS_PROGRESS_PLAY_DRAWABLE:
 					playDrawable.setBounds((int) progressPlayRect.left, (int) progressPlayRect.top, (int) progressPlayRect.right, (int) progressPlayRect.bottom);
@@ -451,8 +473,6 @@ public class ProgressTimeBar extends View {
 		progressPlayRect.set(progressUnPlayRect);
 		// 缓冲矩形坐标与未播放相同
 		progressBufferRect.set(progressUnPlayRect);
-
-		setRect();
 	}
 
 	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -524,15 +544,31 @@ public class ProgressTimeBar extends View {
 		}
 	}
 
-	// 更新播放进度和缓冲进度矩阵
-	private void setRect() {
-		// 缓冲进度
-		progressBufferRect.right = progressUnPlayRect.left + calculateBufferRect();
+	// 刷新Rect
+	private void refreshRect() {
 		// bar进度
 		barRect.left = progressUnPlayRect.left + calculateBarRect();
 		barRect.right = barRect.left + barHeight;
+		progressPlayPath.reset();
+		progressUnPlayPath.reset();
+		progressBufferPath.reset();
+		// 缓冲进度
+		progressBufferRect.right = progressUnPlayRect.left + calculateBufferRect();
 		// 播放进度
 		progressPlayRect.right = progressUnPlayRect.left + calculatePlayRect();
+		progressUnPlayPath.addRoundRect(progressUnPlayRect,
+				new float[] { progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius },
+				Path.Direction.CW);
+		progressPlayPath.addRoundRect(progressPlayRect,
+				new float[] { progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius },
+				Path.Direction.CW);
+		progressBufferPath.addRoundRect(progressBufferRect,
+				new float[] { progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius },
+				Path.Direction.CW);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			progressPlayPath.op(progressUnPlayPath, Path.Op.INTERSECT); // 交集
+			progressBufferPath.op(progressUnPlayPath, Path.Op.INTERSECT); // 交集
+		}
 	}
 
 	// 计算播放进度
@@ -583,6 +619,18 @@ public class ProgressTimeBar extends View {
 		postInvalidate();
 	}
 
+	/**
+	 * 设置当前进度和缓冲进度
+	 * 
+	 * @param currentDuration
+	 * @param bufferDuration
+	 */
+	public void setCurrentAndBufferDuration(long currentDuration, long bufferDuration) {
+		this.currentDuration = currentDuration;
+		this.bufferDuration = bufferDuration;
+		postInvalidate();
+	}
+
 	// 获取最大时间
 	public long getMaxDuration() {
 		return maxDuration;
@@ -601,6 +649,11 @@ public class ProgressTimeBar extends View {
 	// 获取文字宽高
 	private int[] getTextValue(Paint paint, String text) {
 		int[] values = new int[2];
+		if (TextUtils.isEmpty(text) || paint == null) {
+			values[0] = 0;
+			values[1] = 0;
+			return values;
+		}
 		Rect rect = new Rect();
 		paint.getTextBounds(text, 0, text.length(), rect);
 		values[0] = rect.width();
@@ -732,7 +785,7 @@ public class ProgressTimeBar extends View {
 
 	@Override protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
-//		detach();
+		// detach();
 	}
 
 	public void detach() {
@@ -742,12 +795,18 @@ public class ProgressTimeBar extends View {
 		progressPlayPaint = null;
 		timePaint = null;
 		barDrawable = null;
+		unPlayDrawable = null;
+		playDrawable = null;
+		bufferDrawable = null;
 		progressUnPlayRect = null;
 		progressPlayRect = null;
 		progressBufferRect = null;
 		barRect = null;
 		lTimeRect = null;
 		rTimeRect = null;
+		progressUnPlayPath = null;
+		progressPlayPath = null;
+		progressBufferPath = null;
 		seekListener = null;
 		linearGradientPlay = null;
 		linearGradientUnPlay = null;

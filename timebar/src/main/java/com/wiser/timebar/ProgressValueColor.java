@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -29,6 +30,8 @@ public class ProgressValueColor extends View {
 	private RectF			progressRectF;					// 进度条矩阵
 
 	private Paint			progressPaint;					// 进度条画笔
+
+	private Path			progressPath;					// 进度条默认path
 
 	private Path[]			paths;
 
@@ -76,12 +79,14 @@ public class ProgressValueColor extends View {
 		progressPaint.setTextAlign(Paint.Align.CENTER);
 
 		progressRectF = new RectF();
+
+		progressPath = new Path();
 	}
 
 	@Override protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		progressPaint.setColor(progressColor);
-		canvas.drawRoundRect(progressRectF, progressRoundRadius, progressRoundRadius, progressPaint);
+		canvas.drawPath(progressPath, progressPaint);
 
 		if (paths == null || paths.length == 0 || colors == null || colors.length == 0 || paths.length != colors.length) return;
 		for (int i = 0; i < paths.length; i++) {
@@ -175,6 +180,9 @@ public class ProgressValueColor extends View {
 			return;
 		}
 
+		progressPath.addRoundRect(progressRectF,
+				new float[] { progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius },
+				Path.Direction.CW);
 		for (int i = 0; i < rectFS.length; i++) {
 			if (i == 0) rectFS[i].set(progressRectF.left, progressRectF.top, progressRectF.left + (values[i] * (progressRectF.right - progressRectF.left) / maxValue), progressRectF.bottom);
 			else if (i == rectFS.length - 1) {
@@ -190,6 +198,9 @@ public class ProgressValueColor extends View {
 					paths[i].addRoundRect(rectFS[i], new float[] { 0, 0, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, 0, 0 }, Path.Direction.CCW);
 				else paths[i].addRoundRect(rectFS[i], 0, 0, Path.Direction.CW);
 			} else paths[i].addRoundRect(rectFS[i], 0, 0, Path.Direction.CW);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+				paths[i].op(progressPath, Path.Op.INTERSECT); // 交集
+			}
 		}
 
 		postInvalidate();
@@ -197,10 +208,10 @@ public class ProgressValueColor extends View {
 
 	@Override protected void onDetachedFromWindow() {
 		super.onDetachedFromWindow();
-//		detach();
+		// detach();
 	}
 
-	public void detach(){
+	public void detach() {
 		progressRectF = null;
 		progressPaint = null;
 		paths = null;

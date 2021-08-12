@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wiser.timebar.ProgressInsideText;
 import com.wiser.timebar.ProgressTimeBar;
 import com.wiser.timebar.ProgressValueBar;
 import com.wiser.timebar.ProgressValueColor;
@@ -34,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 	private long				bufferDuration	= 0;	// 缓冲时间
 
 	private ProgressValueColor	valueColor;
+
+	private ProgressInsideText progressText;
+
+	private ProgressTimeBar		timeBar0;
 
 	private ProgressTimeBar		timeBar1;
 
@@ -153,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 					reference.get().currentDuration += 1000;
 					if (reference.get().currentDuration >= reference.get().maxDuration) {
 						reference.get().currentDuration = reference.get().maxDuration;
+						reference.get().progressText.setCurrentDuration(reference.get().currentDuration,"倒计时0秒");
+						reference.get().timeBar0.setCurrentDuration(reference.get().currentDuration);
 						reference.get().timeBar1.setCurrentDuration(reference.get().currentDuration);
 						reference.get().timeBar2.setCurrentDuration(reference.get().currentDuration);
 						reference.get().timeBar3.setCurrentDuration(reference.get().currentDuration);
@@ -163,6 +170,8 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 					}
 					if (reference.get().currentDuration <= 0) {
 						reference.get().currentDuration = 0;
+						reference.get().progressText.setCurrentDuration(reference.get().currentDuration,"倒计时60秒");
+						reference.get().timeBar0.setCurrentDuration(reference.get().currentDuration);
 						reference.get().timeBar1.setCurrentDuration(reference.get().currentDuration);
 						reference.get().timeBar2.setCurrentDuration(reference.get().currentDuration);
 						reference.get().timeBar3.setCurrentDuration(reference.get().currentDuration);
@@ -174,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 					reference.get().bufferDuration += 2500;
 					if (reference.get().bufferDuration >= reference.get().maxDuration) {
 						reference.get().bufferDuration = reference.get().maxDuration;
+						reference.get().timeBar0.setBufferDuration(reference.get().bufferDuration);
 						reference.get().timeBar1.setBufferDuration(reference.get().bufferDuration);
 						reference.get().timeBar2.setBufferDuration(reference.get().bufferDuration);
 						reference.get().timeBar3.setBufferDuration(reference.get().bufferDuration);
@@ -184,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 					}
 					if (reference.get().bufferDuration <= 0) {
 						reference.get().bufferDuration = 0;
+						reference.get().timeBar0.setBufferDuration(reference.get().bufferDuration);
 						reference.get().timeBar1.setBufferDuration(reference.get().bufferDuration);
 						reference.get().timeBar2.setBufferDuration(reference.get().bufferDuration);
 						reference.get().timeBar3.setBufferDuration(reference.get().bufferDuration);
@@ -198,6 +209,8 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 						removeMessages(reference.get().UPDATE_DURATION);
 						return;
 					}
+					reference.get().progressText.setCurrentDuration(reference.get().currentDuration,"倒计时" + (reference.get().maxDuration - reference.get().currentDuration) / 1000 + "秒");
+					reference.get().timeBar0.setCurrentAndBufferDuration(reference.get().currentDuration,reference.get().bufferDuration);
 					reference.get().timeBar1.setBufferDuration(reference.get().bufferDuration);
 					reference.get().timeBar1.setCurrentDuration(reference.get().currentDuration);
 					reference.get().timeBar2.setBufferDuration(reference.get().bufferDuration);
@@ -223,6 +236,8 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		setContentView(R.layout.activity_main);
 
 		valueColor = findViewById(R.id.value_color);
+		progressText = findViewById(R.id.progressText);
+		timeBar0 = findViewById(R.id.timeBar0);
 		timeBar1 = findViewById(R.id.timeBar1);
 		timeBar2 = findViewById(R.id.timeBar2);
 		timeBar3 = findViewById(R.id.timeBar3);
@@ -237,6 +252,8 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		btnPause = findViewById(R.id.btn_pause);
 		tvPlayState = findViewById(R.id.tv_play_state);
 
+		progressText.setMaxDuration(maxDuration);
+		timeBar0.setMaxDuration(maxDuration);
 		timeBar1.setMaxDuration(maxDuration);
 		timeBar2.setMaxDuration(maxDuration);
 		timeBar3.setMaxDuration(maxDuration);
@@ -248,6 +265,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		valueBar1.setCurrentValue(-30);
 		valueBar1.setStartValue(-40);
 
+		timeBar0.setSeekListener(this);
 		timeBar1.setSeekListener(this);
 		timeBar2.setSeekListener(this);
 		timeBar3.setSeekListener(this);
@@ -260,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 		btnPlay.setOnClickListener(this);
 		btnPause.setOnClickListener(this);
 
-		valueColor.setColorValues(new int[] { Color.RED, Color.BLUE, Color.YELLOW }, new float[] { 99.5550f, 40.4450f, 70 });
+		valueColor.setColorValues(new int[] { Color.RED, Color.BLUE, Color.YELLOW }, new float[] { 3.5550f, 40.4450f, 166 });
 
 		timeHandler = new TimeHandler(this);
 
@@ -274,6 +292,7 @@ public class MainActivity extends AppCompatActivity implements ProgressTimeBar.S
 			timeHandler.reference.clear();
 			timeHandler = null;
 		}
+		timeBar0 = null;
 		timeBar1 = null;
 		timeBar2 = null;
 		timeBar3 = null;

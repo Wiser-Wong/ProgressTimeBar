@@ -35,6 +35,68 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="5dp"
+            android:text="进度内的文本"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressInsideText
+            android:id="@+id/progressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressInsideRoundRadius="25dp"
+            app:progressInsidePlayColor="#bbffee"
+            app:progressIsInsideTextWrapWidth="true"
+            app:progressInsideText="倒计时60秒"
+            app:progressInsideTextSize="10sp"
+            app:progressInsideTextColor="@color/colorAccent"
+            app:progressInsideTextPaddingTop="10dp"
+            app:progressInsideTextPaddingBottom="5dp"
+            app:progressInsideTextPaddingStart="10dp"
+            app:progressInsideTextPaddingEnd="5dp"
+            app:progressInsideTextPadding="0dp"
+            app:progressInsideUnPlayColor="#00ffff"
+            app:progressInsidePlayStartColor="#00ff00"
+            app:progressInsidePlayCenterColor="#0000ff"
+            app:progressInsidePlayEndColor="#ff0000"
+            app:progressInsideUnPlayStartColor="#ff00ff"
+            app:progressInsideUnPlayCenterColor="#ffff00"
+            app:progressInsideUnPlayEndColor="#00ffff"
+            app:progressInsideIsRadius="false"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="没有bar，带未播放进度/播放进度/缓冲进度"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.wiser.timebar.ProgressTimeBar
+            android:id="@+id/timeBar0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:padding="15dp"
+            app:progressBufferColor="#ff0000"
+            app:progressHeight="15dp"
+            app:progressIsHasBar="false"
+            app:progressIsHasBuffer="true"
+            app:progressPlayColor="#ffff00"
+            app:progressRoundRadius="10dp"
+            app:progressTimeColor="#ff00ff"
+            app:progressTimeMode="HAS_TIME"
+            app:progressTimePadding="30dp"
+            app:progressTimeTextSize="15sp"
+            app:progressUnPlayColor="#f2f2f2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
             android:text="发光Bar并且带缓冲的进度条"
             android:textColor="@color/colorAccent"
             android:textSize="14sp" />
@@ -288,6 +350,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#000fe0"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:progressCurrentValue="30"
             app:progressMaxValue="100"
             app:progressStartValue="-40"
@@ -319,6 +383,8 @@
             android:layout_height="wrap_content"
             android:background="#000fe0"
             app:progressCurrentValue="30"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:progressMaxValue="100"
             app:progressStartValue="-40"
             app:progressValueBarColor="#ffffff"
@@ -331,15 +397,9 @@
             app:progressValueIsCanClick="false"
             app:progressValueIsHasBar="true"
             app:progressValueIsHasPlayProgress="true"
-            app:progressValuePlayCenterColor="#E0E0E0"
-            app:progressValuePlayColor="#000000"
-            app:progressValuePlayEndColor="#D2691E"
-            app:progressValuePlayStartColor="#0000EE"
-            app:progressValueRoundRadius="3dp"
-            app:progressValueUnPlayCenterColor="@color/colorPrimary"
-            app:progressValueUnPlayColor="#00ffff"
-            app:progressValueUnPlayEndColor="#ffff00"
-            app:progressValueUnPlayStartColor="@color/colorAccent" />
+            app:progressValuePlayColor="#ff00ff"
+            app:progressValueRoundRadius="10dp"
+            app:progressValueUnPlayColor="#00ffff" />
 
         <Button
             android:id="@+id/btn_play"

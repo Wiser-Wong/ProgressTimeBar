@@ -65,12 +65,36 @@
         <attr name="progressValueIsHasPlayProgress" format="boolean" />
         <attr name="progressValueIsCanClick" format="boolean" />
     </declare-styleable>
-    <!-- 万能进度条-->
+
+    <!-- 颜色分割进度条-->
     <declare-styleable name="ProgressValueColor">
         <attr name="progressValueColorHeight" format="dimension|reference" />
         <attr name="progressValueColorRoundRadius" format="dimension|reference" />
         <attr name="progressValueColorBackgroundColor" format="color|reference" />
         <attr name="progressValueColorMaxValue" format="float" />
+    </declare-styleable>
+
+    <!-- 进度内文本进度条-->
+    <declare-styleable name="ProgressInsideText">
+        <attr name="progressInsideUnPlayColor" format="color|reference" />
+        <attr name="progressInsidePlayColor" format="color|reference" />
+        <attr name="progressInsideRoundRadius" format="dimension|reference" />
+        <attr name="progressInsideUnPlayStartColor" format="color|reference" />
+        <attr name="progressInsideUnPlayCenterColor" format="color|reference" />
+        <attr name="progressInsideUnPlayEndColor" format="color|reference" />
+        <attr name="progressInsidePlayStartColor" format="color|reference" />
+        <attr name="progressInsidePlayCenterColor" format="color|reference" />
+        <attr name="progressInsidePlayEndColor" format="color|reference" />
+        <attr name="progressIsInsideTextWrapWidth" format="boolean" />
+        <attr name="progressInsideText" format="string" />
+        <attr name="progressInsideTextSize" format="dimension|reference" />
+        <attr name="progressInsideTextColor" format="color|reference" />
+        <attr name="progressInsideTextPadding" format="dimension|reference" />
+        <attr name="progressInsideTextPaddingStart" format="dimension|reference" />
+        <attr name="progressInsideTextPaddingTop" format="dimension|reference" />
+        <attr name="progressInsideTextPaddingEnd" format="dimension|reference" />
+        <attr name="progressInsideTextPaddingBottom" format="dimension|reference" />
+        <attr name="progressInsideIsRadius" format="boolean" />
     </declare-styleable>
 
 </resources>

@@ -7,9 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -83,6 +85,10 @@ public class ProgressValueBar extends View {
 	private RectF			progressPlayRect;												// 进度条播放矩阵
 
 	private RectF			barRect;														// bar矩阵
+
+	private Path			progressUnPlayPath;												// 进度条未播放path
+
+	private Path			progressPlayPath;												// 进度条播放path
 
 	private long			currentValue;													// 当前值
 
@@ -168,6 +174,8 @@ public class ProgressValueBar extends View {
 		initBarCanvasMode(barSrcId);
 
 		initRect();
+
+		initPath();
 
 		this.maxValue = maxValue - startValue;
 		this.currentValue = currentValue - startValue;
@@ -256,12 +264,18 @@ public class ProgressValueBar extends View {
 		barRect = new RectF();
 	}
 
+	// 初始化Path
+	private void initPath() {
+		progressUnPlayPath = new Path();
+		progressPlayPath = new Path();
+	}
+
 	@Override protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
 		canvas.save();
 
-		setRect();
+		refreshRect();
 
 		// 画进度条
 		canvasProgress(canvas);
@@ -275,7 +289,9 @@ public class ProgressValueBar extends View {
 		// 画未播放进度
 		switch (progressUnPlayCanvasModel) {
 			case CANVAS_PROGRESS_UNPLAY_COLOR:
-				canvas.drawRoundRect(progressUnPlayRect, progressRoundRadius, progressRoundRadius, progressUnPlayPaint);
+				// canvas.drawRoundRect(progressUnPlayRect, progressRoundRadius,
+				// progressRoundRadius, progressUnPlayPaint);
+				canvas.drawPath(progressUnPlayPath, progressUnPlayPaint);
 				break;
 			case CANVAS_PROGRESS_UNPLAY_DRAWABLE:
 				unPlayDrawable.setBounds((int) progressUnPlayRect.left, (int) progressUnPlayRect.top, (int) progressUnPlayRect.right, (int) progressUnPlayRect.bottom);
@@ -286,7 +302,9 @@ public class ProgressValueBar extends View {
 			// 画播放进度
 			switch (progressPlayCanvasModel) {
 				case CANVAS_PROGRESS_PLAY_COLOR:
-					canvas.drawRoundRect(progressPlayRect, progressRoundRadius, progressRoundRadius, progressPlayPaint);
+					// canvas.drawRoundRect(progressPlayRect, progressRoundRadius,
+					// progressRoundRadius, progressPlayPaint);
+					canvas.drawPath(progressPlayPath, progressPlayPaint);
 					break;
 				case CANVAS_PROGRESS_PLAY_DRAWABLE:
 					playDrawable.setBounds((int) progressPlayRect.left, (int) progressPlayRect.top, (int) progressPlayRect.right, (int) progressPlayRect.bottom);
@@ -332,7 +350,7 @@ public class ProgressValueBar extends View {
 		// 播放矩形坐标与未播放相同
 		progressPlayRect.set(progressUnPlayRect);
 
-		setRect();
+		refreshRect();
 	}
 
 	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -398,7 +416,7 @@ public class ProgressValueBar extends View {
 	}
 
 	// 更新bar和播放进度矩阵
-	private void setRect() {
+	private void refreshRect() {
 		if (this.currentValue < 0) this.currentValue = 0;
 		if (this.currentValue > maxValue) this.currentValue = maxValue;
 		// bar进度
@@ -406,6 +424,19 @@ public class ProgressValueBar extends View {
 		barRect.right = barRect.left + barHeight;
 		// 播放进度
 		progressPlayRect.right = progressUnPlayRect.left + calculatePlayRect();
+		progressPlayPath.reset();
+		progressUnPlayPath.reset();
+		// 播放进度
+		progressPlayRect.right = progressUnPlayRect.left + calculatePlayRect();
+		progressUnPlayPath.addRoundRect(progressUnPlayRect,
+				new float[] { progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius },
+				Path.Direction.CW);
+		progressPlayPath.addRoundRect(progressPlayRect,
+				new float[] { progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius },
+				Path.Direction.CW);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			progressPlayPath.op(progressUnPlayPath, Path.Op.INTERSECT); // 交集
+		}
 	}
 
 	// 计算播放进度
