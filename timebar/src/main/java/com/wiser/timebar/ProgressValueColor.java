@@ -184,6 +184,7 @@ public class ProgressValueColor extends View {
 				new float[] { progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius, progressRoundRadius },
 				Path.Direction.CW);
 		for (int i = 0; i < rectFS.length; i++) {
+			paths[i].reset();
 			if (i == 0) rectFS[i].set(progressRectF.left, progressRectF.top, progressRectF.left + (values[i] * (progressRectF.right - progressRectF.left) / maxValue), progressRectF.bottom);
 			else if (i == rectFS.length - 1) {
 				if (totalValue == maxValue) rectFS[i].set(rectFS[i - 1].right, progressRectF.top, progressRectF.right, progressRectF.bottom);
